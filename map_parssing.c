@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:18:14 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 09:55:04 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 11:21:54 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,45 +109,6 @@ char *pad_line(int max, char *line)
     padded[len] = '\0';
     return(padded);
 }
-
-// t_plines *padding(char *prev_line, char *next, char *line)
-// {
-//    int max;
-//    t_plines *res;
-   
-   
-//    max = max_len(prev_line, next, line);
-//    (void)lengh(max);
-//    res = gcmalloc(sizeof(t_plines),1);
-//    if(!res)
-//         return(NULL);
-//     res->prev = pad_line(max,prev_line);
-//     res->line = pad_line(max, line);
-//     res->next = pad_line(max, next);
-//    return(res);  
-// }
-
-// int space_valid_adj(char c)
-// {
-//     if(c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-//         return(0);
-//     else
-//         return(1);
-// }
-
-// int space_checking(t_plines *res, int i)
-// {
-  
-//     if(( res->line && (i + 1 < ft_strlen(res->line))
-//         &&(!space_valid_adj(res->line[i+1]))) 
-//         || (res->line && (i - 1 >= 0) && !space_valid_adj(res->line[i-1]))
-//         || ( res->prev && !space_valid_adj(res->prev[i]))
-//         || ( res->next && !space_valid_adj(res->next[i])))
-//             return(0);
-//     else
-//         return(1);
-    
-// }
 
 int parse_inside(t_plines  *res, int *player)
 {

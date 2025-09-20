@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:48:54 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 09:50:53 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 11:21:46 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,6 @@ int space_checking(t_plines *res, int i)
         return(1);
     
 }
-
-// int parse_frame(t_plines *res, int *player)
-// {
-//     int i;
-
-//     if(!res || !res->line)
-//         return(0);
-//     i = 0;
-//     (void)player;
-//     while((res->line)[i] && res->line[i] != '\n')
-//     {
-//         if((res->line)[i] != '1' && (res->line)[i] != ' ')
-//             return(-1);
-//         else if((res->line)[i] == ' ' && !space_checking(res, i))
-//             return(-1);
-//         i++;
-//     }
-//     return(1);
-// }
 
 int max_len(char *prev_line, char *next, char *line)
 {
