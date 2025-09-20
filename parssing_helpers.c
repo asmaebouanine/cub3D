@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 11:04:29 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 11:22:27 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:36:56 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_plines *padding(char *prev_line, char *next, char *line)
    return(res);  
 }
 
+
 int main(int argc, char **argv)
 {
     t_config    *config;
@@ -82,5 +83,8 @@ int main(int argc, char **argv)
     printf("%s\n", config->texture[2]);
     printf("%s\n", config->texture[3]);
     printf("%d\n", config->color->c_color);
-    printf("%d\n", config->color->f_color);    
+    printf("%d\n", config->color->f_color);
+    printf("%d\n", config->player->x);
+    printf("%d\n", config->player->y);
+    printf("%c\n", config->player->direction); 
 }

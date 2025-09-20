@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:11:10 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 09:13:54 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 11:45:31 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int is_texture(char *str, t_identifiers *identifiers)
 {
-    
     if(!ft_strcmp(str,"NO") 
         || !ft_strcmp(str, "SO") 
         || !ft_strcmp(str, "WE") 
@@ -51,11 +50,10 @@ int parse_sec_text(char *str)
         return(1);
     else
         return(0);
-    
 }
 
- int valid_texture(char *str) 
- {
+int valid_texture(char *str) 
+{
     int len;
     char *path;
     char *rest;

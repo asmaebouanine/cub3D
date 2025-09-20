@@ -6,51 +6,11 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:18:14 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 11:21:54 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:33:15 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int ft_strlen(const char *str)
-// {
-//     int i;
-
-//     i = 0;
-//     if (!str)
-//         return(0);
-//     while(str[i])
-//     {
-//         i++;
-//     }
-//     return(i); 
-// }
-
-// int is_valid_char(char c, char *line, int i)
-// {
-//     if(c == '0' || c == '1' || (( i+1 < ft_strlen(line)) 
-//             && (c == 'N' || c == 'S') && line[i+1] != 'O')  
-//             || (c == 'E' && ( i+1 < ft_strlen(line))&& line[i+1] != 'A')
-//             ||( c == 'W' && ( i+1 < ft_strlen(line))&& line[i+1] != 'E') 
-//             || c == ' ')
-//         return (1);
-//     else
-//         return (0);
-// }
-
-// int valid_map_chars(char *line)
-// {
-//     int i;
-    
-//     i = 0;
-//     while(line[i] && line[i] !='\n')
-//     {
-//         if(!is_valid_char(line[i], line, i))
-//             return(0);
-//         i++;
-//     }
-//     return(1);
-// }
 
 int parse_frame(t_plines *res, int *player)
 {
@@ -71,22 +31,6 @@ int parse_frame(t_plines *res, int *player)
     return(1);
 }
 
-// int max_len(char *prev_line, char *next, char *line)
-// {
-//     int plen;
-//     int nlen;
-//     int llen;
-
-//     plen = ft_strlen(prev_line);
-//     nlen = ft_strlen(next);
-//     llen = ft_strlen(line);
-    
-//     if(plen >= nlen && plen >= llen)
-//         return(plen);
-//     else if(nlen >= llen)
-//         return(nlen);
-//     return(llen);
-// }
 
 char *pad_line(int max, char *line)
 {
@@ -109,8 +53,18 @@ char *pad_line(int max, char *line)
     padded[len] = '\0';
     return(padded);
 }
-
-int parse_inside(t_plines  *res, int *player)
+t_player save_coordin(int x, int y, char c)
+{
+    static t_player player;
+    if(x >=0 && y >= 0)
+    {
+        player.direction = c;
+        player.x = x;
+        player.y = y;
+    }
+    return(player);
+}
+int parse_inside(t_plines  *res, int *player, int flag)
 {
     int i;
     size_t len;
@@ -137,7 +91,10 @@ int parse_inside(t_plines  *res, int *player)
                 return(-1);
         }   
         if(res->line[i] == 'N' || res->line[i] == 'S' || res->line[i] == 'E' || res->line[i] == 'W')
+        {
+            save_coordin(i, flag, res->line[i]);
             (*player)++;
+        }
         i++;
     }
     if(i-1 >=0 && res->line[i-1] != '1')
@@ -157,7 +114,7 @@ int lineparssing(char *line, char *next, int first, int *player)
     if(!next || first == 1)
         return(parse_frame(res, player));
     else
-        return(parse_inside(res, player));
+        return(parse_inside(res, player, first));
     return(1);
 }
  

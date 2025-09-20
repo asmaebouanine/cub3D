@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 02:53:03 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 10:53:38 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:21:49 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,20 @@ typedef struct s_map
     int         width;
 }  t_map;
 
+typedef struct s_player
+{
+    int     x;
+    int     y;
+    char    direction;
+}               t_player;
+
 typedef struct s_config
 {
     
     char   **texture;
     t_color     *color;
     t_map       *map;
+    t_player    *player;
 } t_config;
 
 
@@ -129,10 +137,10 @@ int     is_valid_char(char c, char *line, int i);
 int     space_valid_adj(char c);
 int     map_parssing(int fd, char *first_line);
 int     lineparssing(char *line, char *next, int first, int *player);
-int     parse_inside(t_plines  *res, int *player);
+int     parse_inside(t_plines  *res, int *player, int flag);
 char    *pad_line(int max, char *line);
 int     parse_frame(t_plines *res, int *player);
 t_plines *padding(char *prev_line, char *next, char *line);
 int     is_identifier(char *str);
-
+t_player save_coordin(int x, int y, char direc);
 #endif

@@ -6,12 +6,21 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:28:03 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 10:55:44 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:38:22 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+t_player *player_position(void)
+{
+    t_player *player_;
+    player_ = gcmalloc(sizeof(t_player), 0);
+    if(!player_)
+        return(NULL);
+    else
+        return(player_);
+}
 t_config *config_struct(void)
 {
     t_config    *config;
@@ -43,6 +52,9 @@ t_config *config_struct(void)
         if(!config->texture[3])
             return(NULL);
         config->texture[4]= NULL;
+        config->player =  player_position();
+        if(!config->player)
+            return(NULL);
     }
     return(config);
 }
@@ -76,6 +88,7 @@ void fill_config_struct(char *file, t_config **config)
 {
     int fd;
     char *line;
+    t_player player_;
     
     if(!file)
         return;
@@ -91,4 +104,8 @@ void fill_config_struct(char *file, t_config **config)
         line = get_next_line(fd);
     }
     map_filler(fd, line, config);
+    player_ = save_coordin(-1, -1, 0);
+    (*config)->player->direction = player_.direction;
+    (*config)->player->x = player_.x;
+    (*config)->player->y = player_.y - 1;
 }

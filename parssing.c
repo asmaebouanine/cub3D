@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:39:39 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 09:44:44 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 11:52:46 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int after_map_parse(char *line)
 int parssing_core(int fd, t_identifiers *identifiers)
 {
     char *line;
-
     line = get_next_line(fd);
     if (!line)
      return(0);
