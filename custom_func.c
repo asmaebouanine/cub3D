@@ -6,11 +6,35 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:03:23 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/07 03:03:28 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 09:26:57 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t				i;
+	const unsigned char	*ptr;
+	const unsigned char	*ptr1;
+
+	ptr = (const unsigned char *)s1;
+	ptr1 = (const unsigned char *)s2;
+	if (n == 0)
+	{
+		return (0);
+	}
+	else
+	{
+		i = 0;
+		while (i < (n - 1) && (ptr[i] == ptr1[i])
+			&& (ptr[i] != '\0' && ptr1[i] != '\0'))
+		{
+			i++;
+		}
+		return (ptr[i] - ptr1[i]);
+	}
+}
 
 char	*ft_strdup_(const char *s1)
 {

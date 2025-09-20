@@ -6,11 +6,25 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:39:53 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/10 17:00:31 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/20 09:47:48 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int ft_strlen(const char *str)
+{
+    int i;
+
+    i = 0;
+    if (!str)
+        return(0);
+    while(str[i])
+    {
+        i++;
+    }
+    return(i); 
+}
 
 int ft_strcmp(const char *s1, const char *s2)
 {
