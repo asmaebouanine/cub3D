@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:28:03 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 12:38:22 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:33:04 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_player *player_position(void)
     else
         return(player_);
 }
+
 t_config *config_struct(void)
 {
     t_config    *config;

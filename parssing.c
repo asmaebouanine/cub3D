@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:39:39 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 11:52:46 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:23:06 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int config_parsser(char *line, t_identifiers *identifiers)
     if(!splitted)
         return(0);
     if(is_identifier(splitted[0]) == 0)
-        return(0); 
+    return(0); 
     else
     {
         if(is_texture(splitted[0], identifiers) == 1)
@@ -90,9 +90,10 @@ int after_map_parse(char *line)
 int parssing_core(int fd, t_identifiers *identifiers)
 {
     char *line;
+    
     line = get_next_line(fd);
     if (!line)
-     return(0);
+        return(0);
     while(!is_it_map(line))
     {
         if(!config_parsser(line, identifiers))

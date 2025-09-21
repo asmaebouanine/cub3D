@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:18:14 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 12:33:15 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:22:13 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char *pad_line(int max, char *line)
     padded[len] = '\0';
     return(padded);
 }
+
 t_player save_coordin(int x, int y, char c)
 {
     static t_player player;
@@ -64,10 +65,12 @@ t_player save_coordin(int x, int y, char c)
     }
     return(player);
 }
+
 int parse_inside(t_plines  *res, int *player, int flag)
 {
     int i;
     size_t len;
+    char *str;
     
     if(!res)
         return(-1);
@@ -88,7 +91,7 @@ int parse_inside(t_plines  *res, int *player, int flag)
         if(res->line[i] == ' ')
         {
             if(!space_checking(res, i))
-                return(-1);
+            return(-1);
         }   
         if(res->line[i] == 'N' || res->line[i] == 'S' || res->line[i] == 'E' || res->line[i] == 'W')
         {
@@ -97,8 +100,13 @@ int parse_inside(t_plines  *res, int *player, int flag)
         }
         i++;
     }
-    if(i-1 >=0 && res->line[i-1] != '1')
+    str = ft_strtrim(res->line, " \n");
+    if(!str)
         return(-1);
+    if(ft_strlen(str) -1 >= 0 && str[ft_strlen(str) -1] != '1')
+    {
+        return(-1);
+    }
     return(1);
 }
 
@@ -110,11 +118,14 @@ int lineparssing(char *line, char *next, int first, int *player)
     res = padding(prev_line, next, line);
     if(!res)
         return(0);
+    
     prev_line = res->line;
     if(!next || first == 1)
         return(parse_frame(res, player));
     else
+    {
         return(parse_inside(res, player, first));
+    }
     return(1);
 }
  

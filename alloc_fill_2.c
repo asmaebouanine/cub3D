@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:33:55 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 09:35:27 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:09:19 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void color_filler(char *colors, t_config **config, char *ident)
     else if(!ft_strcmp(ident, "C"))
         (*config)->color->c_color = color;
 }
+
 char *filling_pad(char *line)
 {
     int max;
@@ -60,6 +61,7 @@ void map_filler(int fd, char *first_line, t_config **config)
         line = get_next_line(fd);
     }
 }
+
 char *return_texture(char * trimmed)
 {
     int i;
@@ -79,6 +81,7 @@ char *return_texture(char * trimmed)
     }
     return(NULL); 
 }
+
 void texture_filler(char *line, t_config **config)
 {
     char **splitted;
