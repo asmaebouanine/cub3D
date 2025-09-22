@@ -6,28 +6,22 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:21:06 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/21 21:35:46 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/22 12:17:53 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int parse_color(char **splitted)
+int parse_color(char *trimmed)
 {
     
-    if(splitted[2])
-    {
-        return(0);
-    }
-    else
-        return(valid_color(splitted[1]));
+    return(valid_color(trimmed));
     
 }
 
 int valid_color(char *colors)
 {
     char **splitted;
-    char *trimmed;
     int i;
     
     i = 0;
@@ -42,10 +36,7 @@ int valid_color(char *colors)
         return(0);
     while(splitted[i])
     {
-        trimmed = ft_strtrim(splitted[i], " \n");
-        if(!trimmed)
-            return(0);
-        if(!color_validation(trimmed))
+        if(!color_validation(splitted[i]))
             return(0);
         i++;
     }

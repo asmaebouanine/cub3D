@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:39:39 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/21 21:23:06 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:53:29 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int config_parsser(char *line, t_identifiers *identifiers)
         if(is_texture(splitted[0], identifiers) == 1)
             return(parse_texture(splitted,trimmed));
         else if(is_color(splitted[0], identifiers) == 1)
-            return(parse_color(splitted));
+        {
+            return(parse_color((trimmed + 1)));
+        }
         else
             return(0);
     }

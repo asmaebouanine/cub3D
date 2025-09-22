@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 02:53:03 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/09/20 12:21:49 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:50:29 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int     is_color(char *str, t_identifiers *identifiers);
 int     color_validation(char *color);
 int     comma_count(char *color);
 int     valid_color(char *colors);
-int     parse_color(char **splitted);
+int     parse_color(char *trimmed);
 void    fill_config_struct(char *file, t_config **config);
 void    texture_filler(char *line, t_config **config);
 t_map  *alloc_map(void);
