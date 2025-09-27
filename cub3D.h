@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/09/19 14:28:44 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:04:56 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <stdbool.h>
 #include "mlx/mlx.h"
 
@@ -29,10 +30,33 @@
 #define SIZE 80
 // #define BLOCK 80
 
+#define LEFT_ARROW 65361
+#define RIGHT_ARROW 65363
 #define W 119
 #define A 97
 #define S 115
 #define D 100
+#define ESC 65307
+
+
+typedef struct s_player
+{
+  char direction;
+  int x;
+  int y;
+  int size;
+  double dx;
+  double dy;
+  double plane_x;
+  double plane_y;
+  bool key_up;
+  bool key_down;
+  bool key_left;
+  bool key_right;
+  bool key_rot_left;
+  bool key_rot_right;
+  double rot_step;
+} t_player;
 
 typedef struct s_trash
 {
@@ -68,7 +92,7 @@ typedef struct s_color
 typedef struct s_map
 {
     char        **line;
-    int         heigh;
+    int         height;
     int         width;
 }  t_map;
 
@@ -77,21 +101,14 @@ typedef struct s_config
     char   **texture;
     t_color     *color;
     t_map       *map;
+    t_player    *player;
 } t_config;
 
-typedef struct s_player
-{
-  float x;
-  float y;
-  bool key_up;
-  bool key_down;
-  bool key_left;
-  bool key_right;
-} t_player;
 
 typedef struct s_game
 {
-  char  **map;
+  int   win_height;
+  int   win_width;
   void  *mlx;
   void  *win;
   void  *img;
@@ -101,12 +118,18 @@ typedef struct s_game
   int   bits_per_pixel;
   t_player player;
   t_config *config;
+  t_map *map;
 }   t_game;
 
-t_config *parsser(int argc, char **argv);
-int   ft_strlen(const char *str);
+
+void    init_player(t_game *g);
+void  move_player(t_player *p, char **map);
+int   key_press(int keycode, t_player *player);
+int   key_release(int keycode, t_player *player);
+
+
+int	    ft_strlen(const char *str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*custom_strdup(const char	*s1);
 void	*gcmalloc(size_t size, int status_flag);
 char	*get_next_line(int fd);
 char	*ft_strdup(char *s1, char *temp);
@@ -129,12 +152,50 @@ int     lengh(int len);
 int     width(int i);
 char	*ft_strdup_(const char *s1);
 char    *pad_line(int max, char *line);
-
-
-void  init_player(t_player *player);
-void  move_player(t_player *player);
-int   key_press(int keycode, t_player *player);
-int   key_release(int keycode, t_player *player);
+char	*custom_strjoin(const char *s1, const char *s2, int pid);
+char	*ft_strndup(const char *s1, size_t n);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+int	    ft_strncmp(const char *s1, const char *s2, size_t n);
+int     is_texture(char *str, t_identifiers *identifiers);
+int     parse_texture(char **splitted, char *trimmed);
+int     valid_texture(char *str);
+int     parse_sec_text(char *str);
+int     ea_tex_len(int len);
+int     no_tex_len(int len);
+int     so_tex_len(int len);
+int     we_tex_len(int len);
+int     is_color(char *str, t_identifiers *identifiers);
+int     color_validation(char *color);
+int     comma_count(char *color);
+int     valid_color(char *colors);
+int     parse_color(char *trimmed);
+void    fill_config_struct(char *file, t_config **config);
+void    texture_filler(char *line, t_config **config);
+t_map  *alloc_map(void);
+t_config *config_struct(void);
+void    texture_filler(char *line, t_config **config);
+char    *return_texture(char * trimmed);
+void    map_filler(int fd, char *first_line, t_config **config);
+char    *filling_pad(char *line);
+void    color_filler(char *colors, t_config **config, char *ident);
+t_config *parsser(int argc, char **argv);
+int     config_parsser(char *line, t_identifiers *identifiers);
+int     after_map_parse(char *line);
+int     parssing_core(int fd, t_identifiers *identifiers);
+int     parssing(int fd);
+int     space_checking(t_plines *res, int i);
+int     max_len(char *prev_line, char *next, char *line);
+int     valid_map_chars(char *line);
+int     is_valid_char(char c, char *line, int i);
+int     space_valid_adj(char c);
+int     map_parssing(int fd, char *first_line);
+int     lineparssing(char *line, char *next, int first, int *player);
+int     parse_inside(t_plines  *res, int *player, int flag);
+char    *pad_line(int max, char *line);
+int     parse_frame(t_plines *res, int *player);
+t_plines *padding(char *prev_line, char *next, char *line);
+int     is_identifier(char *str);
+t_player save_coordin(int x, int y, char direc);
 
 #endif
 
