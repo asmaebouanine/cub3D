@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/09/27 18:58:33 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:15:42 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char    **get_map(void)
     map[6] = "100000000001";
     map[7] = "111111111111";
     map[8] = NULL;
+    t_player    *player;
     return (map);
 }
 
@@ -42,7 +43,7 @@ void    put_pixel(int x, int y, int color, t_game *game)
 {
     int index;
     
-    if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
+    if (x >= game->win_width || y >= game->win_height || x < 0 || y < 0)
         return ;
     index = y * game->size_line + x * game->bits_per_pixel / 8;
     game->date[index] = color & 0xFF;
@@ -75,8 +76,8 @@ void    init_game(t_game *game)
     game->win_height = game->map->height * SIZE;
     game->win_width = game->map->width * SIZE;
     game->mlx = mlx_init();//connect the program with the graphics system
-    game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D"); // create a window and show it in the screen
-    game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); // draw a image in the buffer
+    game->win = mlx_new_window(game->mlx, game->win_width, game->win_height, "cub3D"); // create a window and show it in the screen
+    game->img = mlx_new_image(game->mlx, game->win_width, game->win_height); // draw a image in the buffer
     game->date = mlx_get_data_addr(game->img, &game->bits_per_pixel, &game->size_line, &game->endian); //pointer to the butter(can u change pixel)
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);// copy that buffer into the window to see it
 }
@@ -252,7 +253,7 @@ int draw_loop(t_game *game) {
     clear_image(game);
 
     /* 1) update player based on input */
-    // move_player(&game->player, game->map->line);
+    move_player(&game->player, game->map->line);
 
     /* 2) raycast: one ray per screen column */
     t_player *p = &game->player;

@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/09/27 19:04:56 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:15:06 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@
 
 #define BUFFER_SIZE 1
 
-#define WIDTH  1280
-#define HEIGHT 720
-
 #define SIZE 80
 // #define BLOCK 80
 
-#define LEFT_ARROW 65361
-#define RIGHT_ARROW 65363
+#define LEFT_ARROW 65363
+#define RIGHT_ARROW 65361
 #define W 119
 #define A 97
 #define S 115
@@ -57,6 +54,7 @@ typedef struct s_player
   bool key_rot_right;
   double rot_step;
 } t_player;
+
 
 typedef struct s_trash
 {

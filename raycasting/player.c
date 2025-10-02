@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/09/27 19:02:24 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:10:52 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int key_press(int keycode, t_player *player)
 int key_release(int keycode, t_player *player)
 {
      if (keycode == LEFT_ARROW)
-        player->key_rot_left = true;
+        player->key_rot_left = false;
     if (keycode == RIGHT_ARROW)
-        player->key_rot_right = true;
+        player->key_rot_right = false;
     if (keycode == W)
         player->key_up = false;
     if (keycode == S)
@@ -146,6 +146,3 @@ void move_player(t_player *p, char **map)
         check_and_move(p, map, new_x, new_y);
     }
 }
-
-
-
