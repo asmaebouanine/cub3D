@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/02 16:15:42 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:16:48 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char    **get_map(void)
     map[6] = "100000000001";
     map[7] = "111111111111";
     map[8] = NULL;
-    t_player    *player;
     return (map);
 }
 
