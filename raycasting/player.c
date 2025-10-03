@@ -6,22 +6,45 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/02 16:10:52 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/03 17:13:16 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-
-void    init_player(t_game *g)
+void set_player_position(t_player *p, char **map)
 {
-    g->player.size = 33;
-    g->player.x = g->win_width /2;
-    g->player.y = g->win_height/2;
-    g->player.dx = 0;
-    g->player.dy = -1;
-    g->player.plane_x = 0.66;
-    g->player.plane_y = 0;
+    int y = 0;
+    int x;
+
+    while (map[y])
+    {
+        x = 0;
+        while (map[y][x])
+        {
+            if (map[y][x] == 'N' || map[y][x] == 'S' ||
+                map[y][x] == 'E' || map[y][x] == 'W')
+            {
+                p->x = x * SIZE + SIZE / 2;
+                p->y = y * SIZE + SIZE / 2;
+
+                if (map[y][x] == 'N') { p->dx = 0; p->dy = -1; p->plane_x = 0.66; p->plane_y = 0; }
+                if (map[y][x] == 'S') { p->dx = 0; p->dy = 1;  p->plane_x = -0.66; p->plane_y = 0; }
+                if (map[y][x] == 'E') { p->dx = 1; p->dy = 0;  p->plane_x = 0; p->plane_y = 0.66; }
+                if (map[y][x] == 'W') { p->dx = -1; p->dy = 0; p->plane_x = 0; p->plane_y = -0.66; }
+
+                return;
+            }
+            x++;
+        }
+        y++;
+    }
+}
+
+void init_player(t_game *g)
+{
+    set_player_position(&g->player, g->map->line);
+
     g->player.key_up = false;
     g->player.key_down = false;
     g->player.key_left = false;
@@ -30,6 +53,7 @@ void    init_player(t_game *g)
     g->player.key_rot_right = false;
     g->player.rot_step = 0.05;
 }
+
 
 int key_press(int keycode, t_player *player)
 {
@@ -45,7 +69,7 @@ int key_press(int keycode, t_player *player)
         player->key_left = true;
     if (keycode == D)
         player->key_right = true;
-    if (keycode == ESC)
+    if (keycode == ESC || keycode == X)
         exit (1);
     return (0);
 }

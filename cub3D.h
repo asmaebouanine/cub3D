@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/02 16:15:06 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:43:49 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #define BUFFER_SIZE 1
 
-#define SIZE 80
+#define SIZE 140
 // #define BLOCK 80
 
 #define LEFT_ARROW 65363
@@ -33,6 +33,7 @@
 #define A 97
 #define S 115
 #define D 100
+#define X 120
 #define ESC 65307
 
 
@@ -119,7 +120,7 @@ typedef struct s_game
   t_map *map;
 }   t_game;
 
-
+void    set_player_position(t_player *p, char **map);
 void    init_player(t_game *g);
 void  move_player(t_player *p, char **map);
 int   key_press(int keycode, t_player *player);
