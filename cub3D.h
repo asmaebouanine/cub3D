@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/03 16:43:49 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:59:49 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,21 @@ typedef struct s_config
     t_map       *map;
     t_player    *player;
 } t_config;
+
+typedef struct s_ray
+{
+    double rayDirX;
+    double rayDirY;
+    double deltaDistX;
+    double deltaDistY;
+    double sideDistX;
+    double sideDistY;
+    int stepX;
+    int stepY;
+    int side;
+    int mapX;
+    int mapY;
+} t_ray;
 
 
 typedef struct s_game

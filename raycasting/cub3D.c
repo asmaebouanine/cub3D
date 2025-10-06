@@ -6,24 +6,25 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/03 17:13:36 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/06 13:37:22 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
+// draw one pixel in the image buffer
 void    put_pixel(int x, int y, int color, t_game *game)
 {
     int index;
     
     if (x >= game->win_width || y >= game->win_height || x < 0 || y < 0)
         return ;
-    index = y * game->size_line + x * game->bits_per_pixel / 8;
+    index = y * game->size_line + x * game->bits_per_pixel / 8; // calculte the memory location for pixel
     game->date[index] = color & 0xFF;
     game->date[index+1] = (color >> 8) & 0xFF;
     game->date[index+2] = (color >> 16) & 0xFF; 
 }
-
+// intialize mlx window and image
 void    init_game(t_game *game)
 {
     game->win_width = game->map->width * SIZE;
@@ -31,11 +32,11 @@ void    init_game(t_game *game)
     game->mlx = mlx_init();//connect the program with the graphics system
     game->win = mlx_new_window(game->mlx, game->win_width, game->win_height, "cub3D"); // create a window and show it in the screen
     game->img = mlx_new_image(game->mlx, game->win_width, game->win_height); // draw a image in the buffer
-    game->date = mlx_get_data_addr(game->img, &game->bits_per_pixel, &game->size_line, &game->endian); //pointer to the butter(can u change pixel)
-    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);// copy that buffer into the window to see it
+    game->date = mlx_get_data_addr(game->img, &game->bits_per_pixel, &game->size_line, &game->endian); //pointer to the image in the buffer
+    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);// displays the image
 }
 
-//clear the screen (reset the image to black)
+//clear the screen (draw black pixels in the screen)
 void    clear_image(t_game *game)
 {
     int x;
@@ -53,141 +54,127 @@ void    clear_image(t_game *game)
         x++;
     }
 }
-
-void draw_(int x, int y0, int y1, int color, t_game *game) 
+//draw a verical line (wall)
+void draw_wall(int x, int y0, int y1, int color, t_game *game) 
 {
     if (x < 0 || x >= game->win_width)
         return;
-
     if (y0 < 0)
         y0 = 0;
-
     if (y1 >= game->win_height)
         y1 = game->win_height - 1;
-
-    for (int y = y0; y <= y1; ++y)
-        put_pixel(x, y, color, game);
-}
-
-
-
-// --- Calculate delta distances ---
-static void init_delta(double rayDirX, double rayDirY,
-                       double *deltaDistX, double *deltaDistY)
-{
-    *deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1.0 / rayDirX);
-    *deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1.0 / rayDirY);
-}
-
-// --- Initialize steps and initial side distances ---
-static void init_step(double posX, double posY,
-                      double rayDirX, double rayDirY,
-                      double deltaDistX, double deltaDistY,
-                      int *stepX, int *stepY,
-                      double *sideDistX, double *sideDistY,
-                      int mapX, int mapY)
-{
-    if (rayDirX < 0)
+    while (y0 <= y1)
     {
-        *stepX = -1;
-        *sideDistX = (posX - mapX) * deltaDistX;
+        put_pixel(x, y0, color, game);
+        y0++;
+    }
+}
+//calcute fixed step distance for the ray to cross the nest line x y
+void init_delta(t_ray *ray)
+{
+    if (ray->rayDirX == 0)
+        ray->deltaDistX = 1e30;
+    else
+        ray->deltaDistX = fabs(1.0 / ray->rayDirX);
+
+    if (ray->rayDirY == 0)
+        ray->deltaDistY = 1e30;
+    else
+        ray->deltaDistY = fabs(1.0 / ray->rayDirY);
+}
+//prepares the ray to start moving in the correct direction 
+//across the map grid and tells how far the first wall is along each axis.
+void init_step(t_ray *ray, double posX, double posY)
+{
+    if (ray->rayDirX < 0)
+    {
+        ray->stepX = -1;
+        ray->sideDistX = (posX - ray->mapX) * ray->deltaDistX;
     }
     else
     {
-        *stepX = 1;
-        *sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+        ray->stepX = 1;
+        ray->sideDistX = (ray->mapX + 1.0 - posX) * ray->deltaDistX;
     }
-    if (rayDirY < 0)
+
+    if (ray->rayDirY < 0)
     {
-        *stepY = -1;
-        *sideDistY = (posY - mapY) * deltaDistY;
+        ray->stepY = -1;
+        ray->sideDistY = (posY - ray->mapY) * ray->deltaDistY;
     }
     else
     {
-        *stepY = 1;
-        *sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+        ray->stepY = 1;
+        ray->sideDistY = (ray->mapY + 1.0 - posY) * ray->deltaDistY;
     }
 }
 
-// --- Perform the DDA loop ---
-static int perform_dda(t_game *game, int *mapX, int *mapY,
-                       double *sideDistX, double *sideDistY,
-                       double deltaDistX, double deltaDistY,
-                       int stepX, int stepY, int *side)
-{
-    int hit = 0;
 
+int perform_dda(t_game *game, t_ray *ray)
+{
+    int hit;
+    
+    hit = 0;
     while (!hit)
     {
-        if (*sideDistX < *sideDistY)
+        if (ray->sideDistX < ray->sideDistY)
         {
-            *sideDistX += deltaDistX;
-            *mapX += stepX;
-            *side = 0;
+            ray->sideDistX += ray->deltaDistX;
+            ray->mapX += ray->stepX;
+            ray->side = 0;
         }
         else
         {
-            *sideDistY += deltaDistY;
-            *mapY += stepY;
-            *side = 1;
+            ray->sideDistY += ray->deltaDistY;
+            ray->mapY += ray->stepY;
+            ray->side = 1;
         }
-        if (*mapX < 0 || *mapX >= game->map->width ||
-            *mapY < 0 || *mapY >= game->map->height)
-            return (1);
-        if (game->map->line[*mapY][*mapX] == '1')
+        if (ray->mapX < 0 || ray->mapX >= game->map->width ||
+            ray->mapY < 0 || ray->mapY >= game->map->height)
+            return 1;
+        if (game->map->line[ray->mapY][ray->mapX] == '1')
             hit = 1;
     }
-    return (hit);
+    return hit;
 }
 
-// --- Main raycasting function ---
-double cast_single_ray(t_game *game, t_player *p,
-                       double rayDirX, double rayDirY,
-                       int *side_out)
+
+
+double cast_single_ray(t_game *game, t_player *p,t_ray *ray)
 {
     double posX = p->x / (double)SIZE;
     double posY = p->y / (double)SIZE;
-    int mapX = (int)posX;
-    int mapY = (int)posY;
 
-    double deltaDistX, deltaDistY;
-    init_delta(rayDirX, rayDirY, &deltaDistX, &deltaDistY);
+    ray->mapX = (int)posX;
+    ray->mapY = (int)posY;
 
-    int stepX, stepY;
-    double sideDistX, sideDistY;
-    init_step(posX, posY, rayDirX, rayDirY,
-              deltaDistX, deltaDistY,
-              &stepX, &stepY, &sideDistX, &sideDistY,
-              mapX, mapY);
+    init_delta(ray);
+    init_step(ray, posX, posY);
+    perform_dda(game, ray);
 
-    int side = 0;
-    perform_dda(game, &mapX, &mapY, &sideDistX, &sideDistY,
-                deltaDistX, deltaDistY, stepX, stepY, &side);
-
-    double perpDist = (side == 0)
-        ? sideDistX - deltaDistX
-        : sideDistY - deltaDistY;
+    double perpDist = (ray->side == 0)
+        ? ray->sideDistX - ray->deltaDistX
+        : ray->sideDistY - ray->deltaDistY;
 
     if (perpDist < 1e-6)
         perpDist = 1e-6;
-    if (side_out)
-        *side_out = side;
-    return (perpDist);
+
+    return perpDist;
 }
 
 
-// --- Compute ray direction from camera plane ---
-static void compute_ray(t_player *p, int x, int win_width,
-                        double *rayDirX, double *rayDirY)
+void compute_ray(t_player *p, int x, int win_width,
+                 double *rayDirX, double *rayDirY)
 {
     double cameraX = 2.0 * x / (double)win_width - 1.0;
     *rayDirX = p->dx + p->plane_x * cameraX;
     *rayDirY = p->dy + p->plane_y * cameraX;
 }
 
-// --- Compute line params and choose wall color ---
-static void prepare_line(int win_height, double dist, int side,
-                         int *lineHeight, int *drawStart, int *drawEnd, int *color)
+
+
+void prepare_line(int win_height, double dist, int side,
+                  int *lineHeight, int *drawStart, int *drawEnd, int *color)
 {
     *lineHeight = (int)(win_height / dist);
     *drawStart = -(*lineHeight) / 2 + win_height / 2;
@@ -196,41 +183,37 @@ static void prepare_line(int win_height, double dist, int side,
     if (*drawStart < 0) *drawStart = 0;
     if (*drawEnd >= win_height) *drawEnd = win_height - 1;
 
-    *color = 0xFF0000; // base red
+    *color = 0xFF0000; 
     if (side == 1)
-        *color = (*color >> 1) & 0x7F7F7F; // darker for sides
+        *color = (*color >> 1) & 0x7F7F7F;
 }
 
-
-// New function: render one vertical column (x) of the screen
 void render_column(t_game *game, t_player *p, int x)
 {
-    double rayDirX, rayDirY;
-    compute_ray(p, x, game->win_width, &rayDirX, &rayDirY);
+    t_ray ray;
 
-    int side;
-    double dist = cast_single_ray(game, p, rayDirX, rayDirY, &side);
+    compute_ray(p, x, game->win_width, &ray.rayDirX, &ray.rayDirY);
+
+    double dist = cast_single_ray(game, p,&ray);
 
     int lineHeight, drawStart, drawEnd, color;
-    prepare_line(game->win_height, dist, side,
+    prepare_line(game->win_height, dist, ray.side,
                  &lineHeight, &drawStart, &drawEnd, &color);
 
-    draw_(x, drawStart, drawEnd, color, game);
+    draw_wall(x, drawStart, drawEnd, color, game);
 }
+
+
 
 int draw_loop(t_game *game)
 {
     clear_image(game);
 
-    /* 1) update player based on input */
+   
     move_player(&game->player, game->map->line);
-
-    /* 2) raycast: one ray per screen column */
     t_player *p = &game->player;
     for (int x = 0; x < game->win_width; ++x)
         render_column(game, p, x);
-
-    /* 3) put image to window */
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 
     return 0;
