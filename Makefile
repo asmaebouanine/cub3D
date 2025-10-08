@@ -6,7 +6,7 @@
 #    By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/14 14:59:01 by asbouani          #+#    #+#              #
-#    Updated: 2025/09/27 13:55:24 by asbouani         ###   ########.fr        #
+#    Updated: 2025/10/06 22:06:58 by asbouani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MLX = -Lmlx -lmlx -lX11 -lXext -lm
 
 HEADER = cub3D.h
 
-SRCS = raycasting/cub3D.c raycasting/player.c \
+SRCS = raycasting/cub3D.c raycasting/player.c raycasting/cast_ray.c raycasting/ray_rander.c raycasting/init_player.c \
 		parsing/get_next_line.c parsing/get_next_line_utils.c parsing/cleaning.c parsing/map_parssing.c parsing/custom_func.c parsing/custom_split.c parsing/parssing_helpers.c \
 		parsing/helpers.c parsing/custom_strjoin.c parsing/texture_parse.c  parsing/parssing.c parsing/parssing_lengh.c parsing/map_parssing_2.c parsing/color_parse.c \
 		parsing/alloc_fill.c parsing/alloc_fill_2.c

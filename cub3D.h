@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/05 15:59:49 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/06 22:10:37 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@
 typedef struct s_player
 {
   char direction;
-  int x;
-  int y;
   int size;
+  double x;
+  double y;
   double dx;
   double dy;
   double plane_x;
@@ -119,6 +119,15 @@ typedef struct s_ray
 } t_ray;
 
 
+typedef struct s_line
+{
+    int lineHeight;
+    int drawStart;
+    int drawEnd;
+    int color;
+} t_line;
+
+
 typedef struct s_game
 {
   int   win_height;
@@ -135,11 +144,14 @@ typedef struct s_game
   t_map *map;
 }   t_game;
 
-void    set_player_position(t_player *p, char **map);
+double  cast_ray(t_game *game, t_player *p,t_ray *ray);
+void    put_pixel(int x, int y, int color, t_game *game);
+void    render_column(t_game *game, int x);
+// void    set_player_position(t_player *p, char **map);
 void    init_player(t_game *g);
-void  move_player(t_player *p, char **map);
-int   key_press(int keycode, t_player *player);
-int   key_release(int keycode, t_player *player);
+void    move_player(t_player *p, char **map);
+int     key_press(int keycode, t_player *player);
+int     key_release(int keycode, t_player *player);
 
 
 int	    ft_strlen(const char *str);
