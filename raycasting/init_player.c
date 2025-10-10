@@ -6,13 +6,13 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/07 12:10:27 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/10 15:56:59 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void init_direction(t_player *p, char dir)
+void	init_direction(t_player *p, char dir)
 {
 	if (dir == 'N')
 	{
@@ -44,11 +44,11 @@ void init_direction(t_player *p, char dir)
 	}
 }
 
-void init_position(t_player *p, char **map)
+void	init_position(t_player *p, char **map)
 {
-	int y;
-	int x;
-	
+	int	y;
+	int	x;
+
 	y = 0;
 	while (map[y])
 	{
@@ -60,8 +60,8 @@ void init_position(t_player *p, char **map)
 			{
 				p->x = x * SIZE + SIZE / 2;
 				p->y = y * SIZE + SIZE / 2;
-				init_direction(p, map[y][x]);
-				return;
+				init_direction (p, map[y][x]);
+				return ;
 			}
 			x++;
 		}
@@ -69,7 +69,7 @@ void init_position(t_player *p, char **map)
 	}
 }
 
-void init_player(t_game *g)
+void	init_player(t_game *g)
 {
 	init_position(&g->player, g->map->line);
 	g->player.key_up = false;
@@ -81,7 +81,7 @@ void init_player(t_game *g)
 	g->player.rot_step = 0.05;
 }
 
-int key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_player *player)
 {
 	if (keycode == LEFT_ARROW)
 		player->key_rot_left = true;
@@ -100,9 +100,9 @@ int key_press(int keycode, t_player *player)
 	return (0);
 }
 
-int key_release(int keycode, t_player *player)
+int	key_release(int keycode, t_player *player)
 {
-	 if (keycode == LEFT_ARROW)
+	if (keycode == LEFT_ARROW)
 		player->key_rot_left = false;
 	if (keycode == RIGHT_ARROW)
 		player->key_rot_right = false;

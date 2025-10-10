@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/08 20:45:07 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:14:44 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@ void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 {
 	int	row_map;
 	int	col_map;
-	int	new_col_x;
-	int	new_row_y;
-	
-	row_map = (int)(p->y / SIZE);
+	int	new_col;
+	int	new_row;
+
+	row_map - (int)(p->dy / SIZE);
 	col_map = (int)(p->x / SIZE);
-	new_row_y = (int)(new_y / SIZE);
-	new_col_x = (int)(new_x / SIZE);
-	if (map[row_map][new_col_x] != '1')
+	new_row = (int)(new_y / SIZE);
+	new_col = (int)(new_x / SIZE);
+	if (map[row_map][new_col] != '1')
 		p->x = new_x;
-	if (map[new_row_y][col_map] != '1')
+	if (map[new_row][col_map] != '1')
 		p->y = new_y;
 }
+
 void	normalize_vector(double *x, double *y)
 {
 	double	len;
@@ -55,7 +56,7 @@ void	rotate_player(t_player *p, double step)
 	p->plane_y = old_plane_y + step * old_plane_x;
 	normalize_vector(&p->plane_x, &p->plane_y);
 }
- 
+
 void	handle_movement(t_player *p, char **map, double speed)
 {
 	double	new_x;

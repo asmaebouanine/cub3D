@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/06 22:10:37 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:00:51 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ typedef struct s_game
 double  cast_ray(t_game *game, t_player *p,t_ray *ray);
 void    put_pixel(int x, int y, int color, t_game *game);
 void    render_column(t_game *game, int x);
-// void    set_player_position(t_player *p, char **map);
 void    init_player(t_game *g);
 void    move_player(t_player *p, char **map);
 int     key_press(int keycode, t_player *player);
