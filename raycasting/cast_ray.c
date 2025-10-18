@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 13:32:44 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:22:23 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,37 @@
 //calcute fixed step distance for the ray to cross the nest line x y
 void	init_delta(t_ray *ray)
 {
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	if (ray->ray_dx == 0)
+		ray->delta_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1.0 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_x = fabs(1.0 / ray->ray_dx);
+	if (ray->ray_dy == 0)
+		ray->delta_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1.0 / ray->rayDirY);
+		ray->delta_y = fabs(1.0 / ray->ray_dy);
 }
 
-void	init_step(t_ray *ray, double posX, double posY) //prepares the ray to start moving in the correct direction across the map grid and tells how far the first wall is along each axis.
+void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to start moving in the correct direction across the map grid and tells how far the first wall is along each axis.
 {
-	if (ray->rayDirX < 0)
+	if (ray->ray_dx < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (posX - ray->mapX) * ray->deltaDistX;
+		ray->step_x = -1;
+		ray->dist_x = (pos_x - ray->map_x) * ray->delta_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - posX) * ray->deltaDistX;
+		ray->step_x = 1;
+		ray->dist_x = (ray->map_x + 1.0 - pos_x) * ray->delta_x;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->ray_dy < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (posY - ray->mapY) * ray->deltaDistY;
+		ray->step_y = -1;
+		ray->dist_y = (pos_y - ray->map_y) * ray->delta_y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - posY) * ray->deltaDistY;
+		ray->step_y = 1;
+		ray->dist_y = (ray->map_y + 1.0 - pos_y) * ray->delta_y;
 	}
 }
 
@@ -56,22 +56,22 @@ int	step_dda(t_game *game, t_ray *ray) // step the ray through the map until cro
 	hit = 0;
 	while (!hit)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->dist_x < ray->dist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->dist_x += ray->delta_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->dist_y += ray->delta_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->mapX < 0 || ray->mapX >= game->map->width
-			|| ray->mapY < 0 || ray->mapY >= game->map->height)
+		if (ray->map_x < 0 || ray->map_x >= game->map->width
+			|| ray->map_y < 0 || ray->map_y >= game->map->height)
 			return (1);
-		if (game->map->line[ray->mapY][ray->mapX] == '1')
+		if (game->map->line[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 	return (hit);
@@ -85,15 +85,15 @@ double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the pl
 	
 	posx = p->x / (double)SIZE;
 	posy = p->y / (double)SIZE;
-	ray->mapX = (int)posx;
-	ray->mapY = (int)posy;
+	ray->map_x = (int)posx;
+	ray->map_y = (int)posy;
 	init_delta(ray);
 	init_step(ray, posx, posy);//determines the ray direction and calculate the distance between the player and next grid
 	step_dda(game, ray);
 	if (ray->side == 0)
-		perp_dist = ray->sideDistX - ray->deltaDistX;
+		perp_dist = ray->dist_x - ray->delta_x;
 	else
-		perp_dist = ray->sideDistY - ray->deltaDistY;
+		perp_dist = ray->dist_y - ray->delta_y;
 	if (perp_dist < 1e-6)
 		perp_dist = 1e-6;
 	return (perp_dist);

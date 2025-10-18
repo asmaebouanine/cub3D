@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 20:20:40 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/08 19:04:33 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 20:25:42 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ void ray_direction(t_game *game, t_ray *ray, int x)
     double cameraX;
     
     cameraX = 2.0 * x / (double)game->win_width - 1.0;
-    ray->rayDirX = game->player.dx + game->player.plane_x * cameraX;
-    ray->rayDirY = game->player.dy + game->player.plane_y * cameraX;
+    ray->ray_dx = game->player.dx + game->player.plane_x * cameraX;
+    ray->ray_dy = game->player.dy + game->player.plane_y * cameraX;
 }
 // calculate where and how the wall should be draw 
 void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
 {
-    line->lineHeight = (int)(game->win_height / dist);
-    line->drawStart = -(line->lineHeight) / 2 + game->win_height / 2;
-    line->drawEnd   = (line->lineHeight) / 2 + game->win_height / 2;
-    if (line->drawStart < 0)
-        line->drawStart = 0;
-    if (line->drawEnd >= game->win_height)
-        line->drawEnd = game->win_height - 1;
+    line->line_height = (int)(game->win_height / dist);
+    line->draw_start = -(line->line_height) / 2 + game->win_height / 2;
+    line->draw_end   = (line->line_height) / 2 + game->win_height / 2;
+    if (line->draw_start < 0)
+        line->draw_start = 0;
+    if (line->draw_end >= game->win_height)
+        line->draw_end = game->win_height - 1;
     line->color = 0xFFFF00;
     if (ray->side == 1)
         line->color = (line->color >> 1) & 0x7F7F7F;
@@ -73,5 +73,5 @@ void render_column(t_game *game, int x)
     ray_direction(game, &ray, x);
     dist = cast_ray(game, &game->player, &ray);
     calc_wall(game, &ray, dist, &line);
-    draw_wall(x, line.drawStart, line.drawEnd, line.color, game);
+    draw_wall(x, line.draw_start, line.draw_end, line.color, game);
 }

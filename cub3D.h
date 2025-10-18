@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/10 16:00:51 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 20:25:42 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,25 +105,25 @@ typedef struct s_config
 
 typedef struct s_ray
 {
-    double rayDirX;
-    double rayDirY;
-    double deltaDistX;
-    double deltaDistY;
-    double sideDistX;
-    double sideDistY;
-    int stepX;
-    int stepY;
+    double ray_dx;
+    double ray_dy;
+    double delta_x;
+    double delta_y;
+    double dist_x;
+    double dist_y;
+    int step_x;
+    int step_y;
     int side;
-    int mapX;
-    int mapY;
+    int map_x;
+    int map_y;
 } t_ray;
 
 
 typedef struct s_line
 {
-    int lineHeight;
-    int drawStart;
-    int drawEnd;
+    int line_height;
+    int draw_start;
+    int draw_end;
     int color;
 } t_line;
 
