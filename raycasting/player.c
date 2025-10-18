@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/10 16:14:44 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:27:59 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 	int	new_col;
 	int	new_row;
 
-	row_map - (int)(p->dy / SIZE);
+	row_map = (int)(p->y / SIZE);
 	col_map = (int)(p->x / SIZE);
 	new_row = (int)(new_y / SIZE);
 	new_col = (int)(new_x / SIZE);
@@ -29,33 +29,25 @@ void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 		p->y = new_y;
 }
 
-void	normalize_vector(double *x, double *y)
-{
-	double	len;
-
-	len = sqrt((*x) * (*x) + (*y) * (*y));
-	*x /= len;
-	*y /= len;
-}
-
-void	rotate_player(t_player *p, double step)
+void	rotate_player(t_player *p, double rot_speed)
 {
 	double	old_dx;
-	double	old_dy;
 	double	old_plane_x;
-	double	old_plane_y;
+	double	cos_r;
+	double	sin_r;
 
+	cos_r = cos(rot_speed);
+	sin_r = sin(rot_speed);
 	old_dx = p->dx;
-	old_dy = p->dy;
 	old_plane_x = p->plane_x;
-	old_plane_y = p->plane_y;
-	p->dx = old_dx + step * -old_dy;
-	p->dy = old_dy + step * old_dx;
-	normalize_vector(&p->dx, &p->dy);
-	p->plane_x = old_plane_x + step * -old_plane_y;
-	p->plane_y = old_plane_y + step * old_plane_x;
-	normalize_vector(&p->plane_x, &p->plane_y);
+	// Rotate direction vector
+	p->dx = p->dx * cos_r - p->dy * sin_r;
+	p->dy = old_dx * sin_r + p->dy * cos_r;
+	// Rotate camera plane
+	p->plane_x = p->plane_x * cos_r - p->plane_y * sin_r;
+	p->plane_y = old_plane_x * sin_r + p->plane_y * cos_r;
 }
+
 
 void	handle_movement(t_player *p, char **map, double speed)
 {

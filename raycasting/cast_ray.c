@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/10 16:03:53 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 13:32:44 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,4 @@ double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the pl
 		perp_dist = 1e-6;
 	return (perp_dist);
 }
+
