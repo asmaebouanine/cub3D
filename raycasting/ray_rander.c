@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 20:20:40 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 20:25:42 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 22:01:23 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void draw_wall(int x, int y0, int y1, int color, t_game *game)
         y0++;
     }
 }
+
 //calcutate the direction of the a ray
 void ray_direction(t_game *game, t_ray *ray, int x)
 {

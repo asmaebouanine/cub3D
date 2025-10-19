@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 20:25:42 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 22:25:59 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #define BUFFER_SIZE 1
 
-#define SIZE 140
+#define SIZE 64
 // #define BLOCK 80
 
 #define LEFT_ARROW 65363
@@ -142,7 +142,7 @@ typedef struct s_game
   t_player player;
   t_config *config;
   t_map *map;
-}   t_game;
+} t_game;
 
 double  cast_ray(t_game *game, t_player *p,t_ray *ray);
 void    put_pixel(int x, int y, int color, t_game *game);

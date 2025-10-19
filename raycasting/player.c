@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 15:33:00 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/18 22:25:38 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 		p->y = new_y;
 }
 
+void	handle_movement(t_player *p, char **map, double speed)
+{
+	double	new_x;
+	double	new_y;
+	
+	new_x = p->x;
+	new_y = p->y;
+	if (p->key_up)
+		check_and_move(p, map, new_x + p->dx * speed, new_y + p->dy * speed);
+	if (p->key_down)
+		check_and_move(p, map, new_x - p->dx * speed, new_y - p->dy * speed);
+	if (p->key_left)
+		check_and_move(p, map, new_x + p->dy * speed, new_y - p->dx * speed);
+	if (p->key_right)
+		check_and_move(p, map, new_x - p->dy * speed, new_y + p->dx * speed);
+}
+
 void	rotate_player(t_player *p, double rot_speed)
 {
 	double	old_dx;
@@ -48,24 +65,6 @@ void	rotate_player(t_player *p, double rot_speed)
 	p->plane_y = old_plane_x * sin_r + p->plane_y * cos_r;
 }
 
-
-void	handle_movement(t_player *p, char **map, double speed)
-{
-	double	new_x;
-	double	new_y;
-	
-	new_x = p->x;
-	new_y = p->y;
-	if (p->key_up)
-		check_and_move(p, map, new_x + p->dx * speed, new_y + p->dy * speed);
-	if (p->key_down)
-		check_and_move(p, map, new_x - p->dx * speed, new_y - p->dy * speed);
-	if (p->key_left)
-		check_and_move(p, map, new_x + p->dy * speed, new_y - p->dx * speed);
-	if (p->key_right)
-		check_and_move(p, map, new_x - p->dy * speed, new_y + p->dx * speed);
-}
-
 void	move_player(t_player *p, char **map)
 {
 	double	speed;
@@ -77,3 +76,4 @@ void	move_player(t_player *p, char **map)
 		rotate_player(p, -p->rot_step);
 	handle_movement(p, map, speed);
 }
+
