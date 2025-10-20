@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 22:25:59 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:14:27 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ void    move_player(t_player *p, char **map);
 int     key_press(int keycode, t_player *player);
 int     key_release(int keycode, t_player *player);
 
+void	rotate_player(t_player *p, double rot_speed);
+int     mouse_move(int x, int y, t_game *game);
 
 int	    ft_strlen(const char *str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/10 15:56:59 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:53:35 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,3 +116,4 @@ int	key_release(int keycode, t_player *player)
 		player->key_right = false;
 	return (0);
 }
+

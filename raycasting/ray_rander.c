@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 20:20:40 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 22:01:23 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:11:03 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
         line->draw_start = 0;
     if (line->draw_end >= game->win_height)
         line->draw_end = game->win_height - 1;
-    line->color = 0xFFFF00;
+    line->color = 0xFF0000;
     if (ray->side == 1)
         line->color = (line->color >> 1) & 0x7F7F7F;
 }

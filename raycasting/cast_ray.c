@@ -6,13 +6,13 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 22:02:53 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:49:14 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-//calcute fixed step distance for the ray to cross the nest line x y
+//calcute fixed step distance for the ray to cross the next line x y
 void	init_delta(t_ray *ray)
 {
 	if (ray->ray_dx == 0)
@@ -49,7 +49,7 @@ void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to sta
 	}
 }
 
-int	step_dda(t_game *game, t_ray *ray) // step the ray through the map until cross the wall
+int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hits a wall
 {
 	int	hit;
 
@@ -98,3 +98,4 @@ double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the pl
 		perp_dist = 1e-6;
 	return (perp_dist);
 }
+
