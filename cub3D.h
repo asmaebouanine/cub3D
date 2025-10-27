@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/19 20:14:27 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/26 08:47:22 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 #define D 100
 #define X 120
 #define ESC 65307
+
+
+# define NO 0
+# define WE 1
+# define SO 2
+# define EA 3
 
 
 typedef struct s_player
@@ -116,8 +122,20 @@ typedef struct s_ray
     int side;
     int map_x;
     int map_y;
+    int tex_id;
+    double  wallX;
 } t_ray;
 
+typedef struct s_texture
+{
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_size;
+    int     endian;
+} t_texture;
 
 typedef struct s_line
 {
@@ -125,8 +143,15 @@ typedef struct s_line
     int draw_start;
     int draw_end;
     int color;
+    
 } t_line;
 
+
+typedef struct s_convas
+{
+    t_texture  textures[4];
+    
+} t_convas;
 
 typedef struct s_game
 {
@@ -142,7 +167,10 @@ typedef struct s_game
   t_player player;
   t_config *config;
   t_map *map;
+  t_convas convas;
 } t_game;
+
+
 
 double  cast_ray(t_game *game, t_player *p,t_ray *ray);
 void    put_pixel(int x, int y, int color, t_game *game);
@@ -223,7 +251,8 @@ int     parse_frame(t_plines *res, int *player);
 t_plines *padding(char *prev_line, char *next, char *line);
 int     is_identifier(char *str);
 t_player save_coordin(int x, int y, char direc);
-
+t_texture  *lst_new_convas(char *path, void *mlx_ptr);
+t_convas *xmp_to_image(char **textures, void *mlx_ptr);
 #endif
 
 

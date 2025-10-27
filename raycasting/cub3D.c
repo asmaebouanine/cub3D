@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/20 18:13:38 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/26 08:49:39 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int argc, char **argv)
 {
 	t_config    *config;
 	t_game      game;
+	t_convas    *convas;
 	
 	config = parsser(argc, argv);
 	if (!config)
@@ -75,6 +76,10 @@ int	main(int argc, char **argv)
 	game.map = config->map;
 	game.player = *(config->player);
 	init_game(&game);
+	convas = xmp_to_image(game.config->texture, game.mlx);
+	if(!(convas))
+		return(1);
+	game.convas = *convas;
 	init_player(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);

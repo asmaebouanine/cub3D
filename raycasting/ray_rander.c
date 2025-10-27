@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_rander.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 20:20:40 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/20 18:11:03 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:02:51 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,73 @@ void    put_pixel(int x, int y, int color, t_game *game)
     game->date[index+2] = (color >> 16) & 0xFF; 
 }
 
-// draw a verical line (wall)
-void draw_wall(int x, int y0, int y1, int color, t_game *game) 
+unsigned int apply_shading(unsigned int color, double dist)
 {
-    if (x < 0 || x >= game->win_width)
-        return;
-    if (y0 < 0)
-        y0 = 0;
-    if (y1 >= game->win_height)
-        y1 = game->win_height - 1;
-    while (y0 <= y1)
+    double darkness;
+    int r;
+    int g;
+    int b;
+    
+    darkness = 1.0 / (1.0 + dist * 0.1); 
+    r = (int)(((color >> 16) & 0xFF) * darkness);
+    g = (int)(((color >> 8) & 0xFF) * darkness);
+    b = (int)((color & 0xFF) * darkness);
+    
+    return (r << 16) | (g << 8) | b;
+}
+unsigned int get_texture_color(t_texture *tex, int x, int y)
+{
+    char *dst;
+    
+    dst = tex->addr + (y * tex->line_size + x * (tex->bpp / 8));
+
+    return (*(unsigned int*)dst);
+}
+void draw_floor_and_ceiling(t_game *game, int x)
+{
+    int y;
+ 
+    y = 0;
+    while (y < game->win_height)
     {
-        put_pixel(x, y0, color, game);
-        y0++;
+        
+        if (y < game->win_height / 2)
+            put_pixel(x, y, 0x808080, game);
+        else 
+            put_pixel(x, y, 0x404040, game);
+        
+        y++;
     }
 }
+void draw_wall(int x, t_line *line, t_game *game, t_ray *ray, double dist)
+{
+    t_texture *tex;
+    int tex_x;
+    double step;
+    double tex_pos;
+    int tex_y;
+    int y;
+    unsigned int color ;
 
+    tex = &game->convas.textures[ray->tex_id];
+    tex_x = (int)(ray->wallX * tex->width);
+
+    step = 1.0 * tex->height / line->line_height;
+    tex_pos = (line->draw_start - game->win_height / 2 + line->line_height / 2) * step;
+
+    y = line->draw_start;
+    while (y < line->draw_end)
+    {
+        tex_y = (int)tex_pos & (tex->height - 1);
+        tex_pos += step;
+        color = get_texture_color(tex, tex_x, tex_y);
+
+        color = apply_shading(color, dist); 
+    
+        put_pixel(x, y, color, game);
+        y++;
+    }
+}
 //calcutate the direction of the a ray
 void ray_direction(t_game *game, t_ray *ray, int x)
 {
@@ -51,6 +102,24 @@ void ray_direction(t_game *game, t_ray *ray, int x)
     ray->ray_dy = game->player.dy + game->player.plane_y * cameraX;
 }
 // calculate where and how the wall should be draw 
+void wallx_call(t_game *game, t_ray *ray, double dist)
+{
+    double player_x_unit;
+    double player_y_unit;
+    double hit_world;
+
+    player_x_unit = game->player.x /(double)SIZE;
+    player_y_unit = game->player.y /(double)SIZE;
+    
+    if (ray->side == 0) 
+        hit_world = player_y_unit + ray->ray_dy * dist;
+    else 
+        hit_world = player_x_unit + ray->ray_dx * dist;
+    
+    ray->wallX = hit_world - floor(hit_world);
+    if (ray->tex_id == WE || ray->tex_id == SO) 
+        ray->wallX = 1.0 - ray->wallX;
+}
 void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
 {
     line->line_height = (int)(game->win_height / dist);
@@ -60,9 +129,21 @@ void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
         line->draw_start = 0;
     if (line->draw_end >= game->win_height)
         line->draw_end = game->win_height - 1;
-    line->color = 0xFF0000;
-    if (ray->side == 1)
-        line->color = (line->color >> 1) & 0x7F7F7F;
+    if(ray->side == 1)
+    {
+        if(ray->step_y < 0)
+            ray->tex_id = SO ;
+        else
+            ray->tex_id = NO;
+    }
+    else
+    {
+        if(ray->step_x < 0)
+          ray->tex_id = EA;
+        else
+            ray->tex_id = WE;
+    }
+    wallx_call(game, ray, dist);
 }
 
 void render_column(t_game *game, int x)
@@ -71,8 +152,9 @@ void render_column(t_game *game, int x)
     t_line line;
     double dist;
 
+    draw_floor_and_ceiling(game, x);
     ray_direction(game, &ray, x);
     dist = cast_ray(game, &game->player, &ray);
     calc_wall(game, &ray, dist, &line);
-    draw_wall(x, line.draw_start, line.draw_end, line.color, game);
+    draw_wall(x, &line, game, &ray, dist); 
 }

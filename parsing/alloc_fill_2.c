@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_fill_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:33:55 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/10/03 15:03:57 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/10/24 03:51:52 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ void texture_filler(char *line, t_config **config)
     if(is_identifier(splitted[0]) == 1)
     {
         if(!ft_strcmp(splitted[0], "NO"))
-           (*config)->texture[0] = return_texture(trimmed);
+           (*config)->texture[NO] = return_texture(trimmed);
         else if(!ft_strcmp(splitted[0], "WE"))
-            (*config)->texture[1] = return_texture(trimmed);
+            (*config)->texture[WE] = return_texture(trimmed);
         else if(!ft_strcmp(splitted[0], "SO"))
-            (*config)->texture[2] = return_texture(trimmed);
+            (*config)->texture[SO] = return_texture(trimmed);
         else if(!ft_strcmp(splitted[0], "EA"))
-           (*config)->texture[3] = return_texture(trimmed);
+           (*config)->texture[EA] = return_texture(trimmed);
         else
         {
             if(!(trimmed +1))
