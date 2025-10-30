@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 20:20:40 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/27 19:02:51 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/10/30 23:41:39 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void draw_floor_and_ceiling(t_game *game, int x)
     {
         
         if (y < game->win_height / 2)
-            put_pixel(x, y, 0x808080, game);
+            put_pixel(x, y,0x242422, game);
         else 
-            put_pixel(x, y, 0x404040, game);
+            put_pixel(x, y,0x7B1F50, game);
         
         y++;
     }
@@ -75,19 +75,15 @@ void draw_wall(int x, t_line *line, t_game *game, t_ray *ray, double dist)
 
     tex = &game->convas.textures[ray->tex_id];
     tex_x = (int)(ray->wallX * tex->width);
-
     step = 1.0 * tex->height / line->line_height;
     tex_pos = (line->draw_start - game->win_height / 2 + line->line_height / 2) * step;
-
     y = line->draw_start;
     while (y < line->draw_end)
     {
-        tex_y = (int)tex_pos & (tex->height - 1);
+        tex_y = (int)tex_pos % (tex->height);
         tex_pos += step;
         color = get_texture_color(tex, tex_x, tex_y);
-
         color = apply_shading(color, dist); 
-    
         put_pixel(x, y, color, game);
         y++;
     }
