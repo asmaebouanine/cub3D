@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/26 08:49:39 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/02 12:46:09 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_game(t_game *game) // intialize mlx window and image
 {
-	game->win_width = game->map->width * SIZE;
-	game->win_height = game->map->height * SIZE;
+	game->win_width = WIDTH;
+	game->win_height = HEIGHT;
 	game->mlx = mlx_init();//connect the program with the graphics system
 	game->win = mlx_new_window(game->mlx, game->win_width, game->win_height, "cub3D"); // create a window and show it in the screen
 	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height); // draw a image in the buffer

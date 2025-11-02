@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/18 22:25:38 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/02 12:46:25 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	move_player(t_player *p, char **map)
 {
 	double	speed;
 
-	speed = 5;
+	speed = 10;
 	if (p->key_rot_left)
 		rotate_player(p, p->rot_step);
 	if (p->key_rot_right)

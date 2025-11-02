@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/26 08:47:22 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/02 12:46:14 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 
 #define SIZE 64
 // #define BLOCK 80
+
+#define WIDTH 1280
+#define HEIGHT 720
 
 #define LEFT_ARROW 65363
 #define RIGHT_ARROW 65361
