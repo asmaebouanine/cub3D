@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/02 12:46:14 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:21:49 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,13 @@ int     is_identifier(char *str);
 t_player save_coordin(int x, int y, char direc);
 t_texture  *lst_new_convas(char *path, void *mlx_ptr);
 t_convas *xmp_to_image(char **textures, void *mlx_ptr);
+void    draw_wall(int x, t_line *line, t_game *game, t_ray *ray, double dist);
+void    draw_floor_and_ceiling(t_game *game, int x);
+void    calc_wall(t_game *game, t_ray *ray, double dist, t_line *line);
+void    wallx_call(t_game *game, t_ray *ray, double dist);
+unsigned int get_texture_color(t_texture *tex, int x, int y);
+unsigned int apply_shading(unsigned int color, double dist);
+
 #endif
 
 
