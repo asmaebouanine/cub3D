@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/02 12:46:25 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:53:59 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ void	move_player(t_player *p, char **map)
 		rotate_player(p, -p->rot_step);
 	handle_movement(p, map, speed);
 }
-

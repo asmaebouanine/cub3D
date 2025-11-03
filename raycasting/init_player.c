@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/19 17:53:35 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:42:16 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	init_position(t_player *p, char **map)
 void	init_player(t_game *g)
 {
 	init_position(&g->player, g->map->line);
+	g->player.key_rot_left = false;
+	g->player.key_rot_right = false;
 	g->player.key_up = false;
 	g->player.key_down = false;
 	g->player.key_left = false;
 	g->player.key_right = false;
-	g->player.key_rot_left = false;
-	g->player.key_rot_right = false;
 	g->player.rot_step = 0.05;
 }
 
