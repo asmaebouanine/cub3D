@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:20 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:28:22 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/03 00:47:59 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int parse_frame(t_plines *res, int *player)
     while((res->line)[i] && res->line[i] != '\n')
     {
         if((res->line)[i] != '1' && (res->line)[i] != ' ')
+        {
             return(-1);
+        }
         else if((res->line)[i] == ' ' && !space_checking(res, i))
             return(-1);
         i++;
@@ -71,7 +73,7 @@ int parse_inside(t_plines  *res, int *player, int flag)
     int i;
     size_t len;
     char *str;
-    
+
     if(!res)
         return(-1);
     i = 0;
@@ -91,8 +93,14 @@ int parse_inside(t_plines  *res, int *player, int flag)
         if(res->line[i] == ' ')
         {
             if(!space_checking(res, i))
-            return(-1);
-        }   
+                return(-1);
+        } 
+        if(res->line[i] == 'D')
+        {
+            if(!door_checking(res, i))
+                return(-1);
+            doors_coordin(i, flag);
+        }
         if(res->line[i] == 'N' || res->line[i] == 'S' || res->line[i] == 'E' || res->line[i] == 'W')
         {
             save_coordin(i, flag, res->line[i]);
@@ -103,7 +111,7 @@ int parse_inside(t_plines  *res, int *player, int flag)
     str = ft_strtrim(res->line, " \n");
     if(!str)
         return(-1);
-    if(ft_strlen(str) -1 >= 0 && str[ft_strlen(str) -1] != '1')
+    if(ft_strlen(str) -1 >= 0 && (str[ft_strlen(str) -1] != '1'))
     {
         return(-1);
     }
@@ -118,10 +126,11 @@ int lineparssing(char *line, char *next, int first, int *player)
     res = padding(prev_line, next, line);
     if(!res)
         return(0);
-    
     prev_line = res->line;
     if(!next || first == 1)
+    {
         return(parse_frame(res, player));
+    }
     else
     {
         return(parse_inside(res, player, first));
@@ -136,7 +145,8 @@ int map_parssing(int fd, char *first_line)
     char *next;
     int  flag;
     static int player;
-    
+    t_door *door;
+       
     line = first_line;
     if (!line)
         return(0);
@@ -154,5 +164,18 @@ int map_parssing(int fd, char *first_line)
     }
     if(player != 1)
         return(0);
+    door = doors_coordin(-1, -1);
+    if(!door)
+        printf("oppa\n");
+    else
+    {
+        while(door)
+        {
+            printf("%d\n", door->door_x);
+            printf("%d\n", door->door_y);
+            door = door->next;
+        }
+    }
     return(1);
 }
+

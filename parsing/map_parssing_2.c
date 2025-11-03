@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:11 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:28:15 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:02:43 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int space_valid_adj(char c)
 {
-    if(c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+    if(c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'D')
         return(0);
     else
         return(1);
 }
 
-
 int is_valid_char(char c, char *line, int i)
 {
-    if(c == '0' || c == '1' || (( i+1 < ft_strlen(line)) 
+    if(c == '0' || c == '1' || c == 'D' || (( i+1 < ft_strlen(line)) 
             && (c == 'N' || c == 'S') && line[i+1] != 'O')  
             || (c == 'E' && ( i+1 < ft_strlen(line))&& line[i+1] != 'A')
             ||( c == 'W' && ( i+1 < ft_strlen(line))&& line[i+1] != 'E') 

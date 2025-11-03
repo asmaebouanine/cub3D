@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/02 17:21:49 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/03 00:40:13 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,14 @@ typedef struct s_config
     t_map       *map;
     t_player    *player;
 } t_config;
+
+typedef struct s_door
+{
+    int door_x;
+    int door_y;
+    char state;
+    struct s_door *next;
+} t_door;
 
 typedef struct s_ray
 {
@@ -262,6 +270,9 @@ void    calc_wall(t_game *game, t_ray *ray, double dist, t_line *line);
 void    wallx_call(t_game *game, t_ray *ray, double dist);
 unsigned int get_texture_color(t_texture *tex, int x, int y);
 unsigned int apply_shading(unsigned int color, double dist);
+int     door_checking(t_plines *res, int i);
+t_door *doors_coordin(int x, int y);
+t_door *door_struct(void);
 
 #endif
 
