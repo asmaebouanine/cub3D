@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:40 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:28:41 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 02:10:23 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_config *parsser(int argc, char **argv)
     int fd;
     t_config    *config;
     
+
     config = NULL;
     if(argc == 2)
     {
@@ -130,6 +131,7 @@ int parssing(int fd)
     identifiers->so = 0;
     identifiers->we = 0;
     identifiers->ea = 0;
+    identifiers->doo = 0;
     identifiers->f = 0;
     identifiers->c = 0;
     return(parssing_core(fd, identifiers));

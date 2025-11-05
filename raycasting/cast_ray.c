@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/10/20 16:49:14 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/05 02:33:40 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hi
 			return (1);
 		if (game->map->line[ray->map_y][ray->map_x] == '1')
 			hit = 1;
+			
 	}
 	return (hit);
 }

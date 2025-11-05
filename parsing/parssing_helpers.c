@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:26 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:28:27 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 01:21:17 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int is_identifier(char *str)
         || !ft_strcmp(str, "WE") 
         || !ft_strcmp(str, "EA") 
         || !ft_strcmp(str,"F") 
-        || !ft_strcmp(str,"C"))
+        || !ft_strcmp(str,"C")
+        || !ft_strcmp(str, "DO"))
             return(1);
     else
         return(0);

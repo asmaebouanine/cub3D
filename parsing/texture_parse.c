@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:45 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:28:49 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 02:08:54 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int is_texture(char *str, t_identifiers *identifiers)
     if(!ft_strcmp(str,"NO") 
         || !ft_strcmp(str, "SO") 
         || !ft_strcmp(str, "WE") 
-        || !ft_strcmp(str, "EA"))
+        || !ft_strcmp(str, "EA") 
+        || !ft_strcmp(str, "DO"))
     {
         if(!ft_strcmp(str, "NO"))
             identifiers->no++;
@@ -27,7 +28,9 @@ int is_texture(char *str, t_identifiers *identifiers)
             identifiers->we++;
         else if(!ft_strcmp(str, "EA"))
             identifiers->ea++;
-        if(identifiers->no > 1 || identifiers->so > 1 ||  identifiers->we > 1 || identifiers->ea > 1)
+        else if(!ft_strcmp(str, "DO"))
+            identifiers->doo++;
+        if(identifiers->no > 1 || identifiers->so > 1 ||  identifiers->we > 1 || identifiers->ea > 1 || identifiers->doo > 1)
             return(0);
         return(1);
     }
@@ -112,6 +115,8 @@ int parse_texture(char **splitted, char *trimmed)
                 so_tex_len(len);
             else if(!ft_strcmp(splitted[0], "EA"))
                 ea_tex_len(len);
+            else if(!ft_strcmp(splitted[0], "DO"))
+                do_tex_len(len);
             return(1);
         } 
     }

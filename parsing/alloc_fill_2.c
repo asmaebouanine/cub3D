@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:33:55 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/10/24 03:51:52 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 01:34:29 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void texture_filler(char *line, t_config **config)
             (*config)->texture[SO] = return_texture(trimmed);
         else if(!ft_strcmp(splitted[0], "EA"))
            (*config)->texture[EA] = return_texture(trimmed);
+        else if(!ft_strcmp(splitted[0], "DO"))
+            (*config)->texture[DO] = return_texture(trimmed);
         else
         {
             if(!(trimmed +1))

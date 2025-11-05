@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/03 00:40:13 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 01:27:30 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define WE 1
 # define SO 2
 # define EA 3
-
+# define DO 4
 
 typedef struct s_player
 {
@@ -85,9 +85,10 @@ typedef struct s_identifiers
     int so;
     int we;
     int ea;
+    int doo;
     int f;
     int c;
-} t_identifiers;
+}          t_identifiers;
 
 
 typedef struct s_color
@@ -160,7 +161,7 @@ typedef struct s_line
 
 typedef struct s_convas
 {
-    t_texture  textures[4];
+    t_texture  textures[5];
     
 } t_convas;
 
@@ -273,7 +274,7 @@ unsigned int apply_shading(unsigned int color, double dist);
 int     door_checking(t_plines *res, int i);
 t_door *doors_coordin(int x, int y);
 t_door *door_struct(void);
-
+int do_tex_len(int len);
 #endif
 
 

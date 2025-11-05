@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:04 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:27:12 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 01:55:03 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ t_config *config_struct(void)
         return(NULL);
     else
     {
-       config->map = alloc_map();
+        config->map = alloc_map();
         if(!config->map)
             return(NULL);
         config->color = gcmalloc(sizeof(t_color), 0);
         if(!config->color)
-            return(NULL);
-        config->texture = gcmalloc(5 *(sizeof(char *)), 0);
+             return(NULL);
+        config->texture = gcmalloc(6 *(sizeof(char *)), 0);
         if(!config->texture)
             return(NULL);
         config->texture[0] = gcmalloc(no_tex_len(-1), 0);
@@ -53,7 +53,15 @@ t_config *config_struct(void)
         config->texture[3] = gcmalloc(ea_tex_len(-1) , 0);
         if(!config->texture[3])
             return(NULL);
-        config->texture[4]= NULL;
+        if(do_tex_len(-1))
+        {
+            config->texture[4] = gcmalloc(do_tex_len(-1) , 0);
+            if(!config->texture[4])
+                return(NULL);
+        }
+        else
+            config->texture[4]= NULL;
+        config->texture[5]= NULL;
         config->player =  player_position();
         if(!config->player)
             return(NULL);
