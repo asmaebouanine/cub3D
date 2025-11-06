@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/04 23:32:34 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 21:33:14 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,60 @@ void	init_player(t_game *g)
 	g->player.rot_step = 0.05;
 }
 
-int	key_press(int keycode, t_player *player)
+int find_cooresp_dr(t_game *game, int map_y, int map_x)
 {
+	int i;
+	
+	i = 0;
+	if(!game->doors)
+		return(0);
+	while(game->doors[i])
+	{
+		if((game->doors[i]->door_x == map_x )&& (game->doors[i]->door_y == map_y))
+			return(i);
+		i++;
+	}
+	return(i);
+}
+void door_handling(t_game *game)
+{
+	int i;
+	int map_y;
+	int map_x;
+	double	check_x;
+	double	check_y;
+	double player_map_x;
+	double player_map_y;
+	
+	player_map_x = (double)game->player.x / (double)SIZE;
+	player_map_y = (double)game->player.y / (double)SIZE;
+	check_x = player_map_x + game->player.dx * 1.5;
+	check_y = player_map_y + game->player.dy * 1.5;
+	map_x = (int)check_x;
+	map_y = (int)check_y;
+	if (map_y < 0 || map_y >= game->map->height
+		|| map_x < 0 || map_x >= game->map->width)
+		return;
+	if(game->map->line[map_y][map_x] == 'D')
+	{
+		i = find_cooresp_dr(game, map_y, map_x);
+		if(game->doors[i]->state == 'c')
+			game->doors[i]->state = 'o';
+		else 
+			game->doors[i]->state = 'c';
+	}
+}
+int	key_press(int keycode, t_game *game)
+{
+	t_player *player;
+	
+	player = &(game->player);
 	if (keycode == LEFT_ARROW)
 		player->key_rot_left = true;
 	if (keycode == RIGHT_ARROW)
 		player->key_rot_right = true;
+	if(keycode == 111)
+		door_handling(game);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)
@@ -100,8 +148,11 @@ int	key_press(int keycode, t_player *player)
 	return (0);
 }
 
-int	key_release(int keycode, t_player *player)
+int	key_release(int keycode, t_game *game)
 {
+	t_player *player;
+	
+	player = &(game->player);
 	if (keycode == LEFT_ARROW)
 		player->key_rot_left = false;
 	if (keycode == RIGHT_ARROW)

@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/05 01:46:53 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 20:28:14 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 	t_config    *config;
 	t_game      game;
 	t_convas    *convas;
+	t_door     **drs_states;
 	
 	config = parsser(argc, argv);
 	if (!config)
@@ -77,12 +78,14 @@ int	main(int argc, char **argv)
 	game.player = *(config->player);
 	init_game(&game);
 	convas = xmp_to_image(game.config->texture, game.mlx);
-	if(!(convas))
+	drs_states = t_door_to_double_char();
+	if(!(convas || !drs_states))
 		return(1);
 	game.convas = *convas;
+	game.doors = drs_states;
 	init_player(&game);
-	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
-	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
+	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
 	mlx_hook(game.win, 6, 1L<<6, mouse_move, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);

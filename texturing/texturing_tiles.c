@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:12:34 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:12:51 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/06 03:18:48 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,24 @@ void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
         line->draw_start = 0;
     if (line->draw_end >= game->win_height)
         line->draw_end = game->win_height - 1;
-    if(ray->side == 1)
-    {
-        if(ray->step_y < 0)
-            ray->tex_id = SO ;
-        else
-            ray->tex_id = NO;
-    }
+    if(ray->type == 2)
+        ray->tex_id = DO;
     else
     {
-        if(ray->step_x < 0)
-          ray->tex_id = EA;
+        if(ray->side == 1)
+        {
+            if(ray->step_y < 0)
+                ray->tex_id = SO ;
+            else
+                ray->tex_id = NO;
+        }
         else
-            ray->tex_id = WE;
+        {
+            if(ray->step_x < 0)
+                ray->tex_id = EA;
+            else
+                ray->tex_id = WE;
+        }
     }
     wallx_call(game, ray, dist);
 }
@@ -65,9 +70,9 @@ void draw_floor_and_ceiling(t_game *game, int x)
     {
         
         if (y < game->win_height / 2)
-            put_pixel(x, y,0x000000, game);
+            put_pixel(x, y,0x250015, game);
         else 
-            put_pixel(x, y,0x250015 ,game);
+            put_pixel(x, y,0x000000 ,game);
         
         y++;
     }

@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/05 01:27:30 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 21:17:05 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_ray
     int map_x;
     int map_y;
     int tex_id;
+    int type;
     double  wallX;
 } t_ray;
 
@@ -180,6 +181,7 @@ typedef struct s_game
   t_config *config;
   t_map *map;
   t_convas convas;
+  t_door **doors;
 } t_game;
 
 
@@ -189,8 +191,8 @@ void    put_pixel(int x, int y, int color, t_game *game);
 void    render_column(t_game *game, int x);
 void    init_player(t_game *g);
 void    move_player(t_player *p, char **map);
-int     key_press(int keycode, t_player *player);
-int     key_release(int keycode, t_player *player);
+int     key_press(int keycode, t_game *game);
+int     key_release(int keycode, t_game *game);
 
 void	rotate_player(t_player *p, double rot_speed);
 int     mouse_move(int x, int y, t_game *game);
@@ -275,6 +277,9 @@ int     door_checking(t_plines *res, int i);
 t_door *doors_coordin(int x, int y);
 t_door *door_struct(void);
 int do_tex_len(int len);
+t_door **t_door_to_double_char(void);
+int find_cooresp_dr(t_game *game, int map_y, int map_x);
+
 #endif
 
 

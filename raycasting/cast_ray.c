@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/05 02:33:40 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 21:22:57 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to sta
 int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hits a wall
 {
 	int	hit;
+	int i;
 
 	hit = 0;
 	while (!hit)
@@ -72,8 +73,21 @@ int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hi
 			|| ray->map_y < 0 || ray->map_y >= game->map->height)
 			return (1);
 		if (game->map->line[ray->map_y][ray->map_x] == '1')
+		{
+			ray->type = 1;
 			hit = 1;
-			
+		}
+		else if(game->map->line[ray->map_y][ray->map_x] == 'D')
+		{
+			i = find_cooresp_dr(game, ray->map_y, ray->map_x);
+			if(game->doors[i]->state == 'c')
+			{
+				ray->type = 2;
+				hit = 2;
+			}
+			else	
+				hit = 0;
+		}
 	}
 	return (hit);
 }

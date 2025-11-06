@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 04:47:26 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/10/24 11:58:45 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/05 02:36:22 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_convas *xmp_to_image(char **textures, void *mlx_ptr)
     convas = gcmalloc(sizeof(t_convas), 0);
     if(!textures || !convas)
         return(NULL);
-    while(i < 4)
+    while(i < 5)
     {
        tmp_tex = lst_new_convas(textures[i], mlx_ptr);
        if(tmp_tex == NULL)
