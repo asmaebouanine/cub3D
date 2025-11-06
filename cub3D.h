@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/05 21:17:05 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/06 04:25:43 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ double  cast_ray(t_game *game, t_player *p,t_ray *ray);
 void    put_pixel(int x, int y, int color, t_game *game);
 void    render_column(t_game *game, int x);
 void    init_player(t_game *g);
-void    move_player(t_player *p, char **map);
+void	move_player(t_game *game, char **map);
 int     key_press(int keycode, t_game *game);
 int     key_release(int keycode, t_game *game);
 

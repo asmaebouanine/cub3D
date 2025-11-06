@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/05 20:28:14 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/06 04:09:26 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	draw_loop(t_game *game)
 
 	x = 0;
 	clear_image(game);
-	move_player(&game->player, game->map->line);
+	move_player(game, game->map->line);
 	while (x < game->win_width)
 	{
 		render_column(game, x);

@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/05 21:33:14 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/06 04:28:50 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ void	init_direction(t_player *p, char dir)
 	}
 }
 
-void	init_position(t_player *p, char **map)
+void	init_position(t_game *game, char **map)
 {
 	int	y;
 	int	x;
-
+	t_player *p;
+	
+	if(!game)
+		return;
 	y = 0;
+	p = &(game->player);
 	while (map[y])
 	{
 		x = 0;
@@ -71,7 +75,8 @@ void	init_position(t_player *p, char **map)
 
 void	init_player(t_game *g)
 {
-	init_position(&g->player, g->map->line);
+	
+	init_position(g, g->map->line);
 	g->player.key_rot_left = false;
 	g->player.key_rot_right = false;
 	g->player.key_up = false;
