@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:45:17 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 17:26:09 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/08 20:57:12 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	minimap(t_game *game)
 						color = 0xFF0000;
 					else if (game->map->line[row][col] == 'D')
 						color = 0x0000FF;
-					else
+					else if (game->map->line[row][col] == '0')
 						color = 0x000000;
 					draw_one_tile(game, (col - (p_col - VIEW_SIZE / 2)) * TILE_SIZE, \
 					(row - (p_row - VIEW_SIZE / 2)) * TILE_SIZE, color);

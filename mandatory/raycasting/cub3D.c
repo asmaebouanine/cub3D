@@ -6,28 +6,30 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 16:41:45 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:48:34 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	init_game(t_game *game) // intialize mlx window and image
+void	init_game(t_game *game)
 {
 	game->win_width = WIDTH;
 	game->win_height = HEIGHT;
-	game->mlx = mlx_init();//connect the program with the graphics system
-	game->win = mlx_new_window(game->mlx, game->win_width, game->win_height, "cub3D"); // create a window and show it in the screen
-	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height); // draw a image in the buffer
-	game->date = mlx_get_data_addr(game->img, &game->bits_per_pixel, &game->size_line, &game->endian); //pointer to the image in the buffer
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);// displays the image
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, game->win_width, game->win_height,
+			"cub3D");
+	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
+	game->date = mlx_get_data_addr(game->img, &game->bits_per_pixel,
+			&game->size_line, &game->endian);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
-void	clear_image(t_game *game) //clear the screen (draw black pixels in the screen)
+void	clear_image(t_game *game)
 {
 	int	x;
 	int	y;
-
+	
 	x = 0;
 	while (x < game->win_width)
 	{
@@ -53,9 +55,8 @@ int	draw_loop(t_game *game)
 		render_column(game, x);
 		x++;
 	}
-	// minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	return 0;
+	return (0);
 }
 
 int	close_window(void *param)
@@ -66,10 +67,9 @@ int	close_window(void *param)
 
 int	main(int argc, char **argv)
 {
-	t_config    *config;
-	t_game      game;
-	t_convas    *convas;
-	t_door     **drs_states;
+	t_game		game;
+	t_config	*config;
+	t_convas	*convas;
 	
 	config = parsser(argc, argv);
 	if (!config)
@@ -79,16 +79,13 @@ int	main(int argc, char **argv)
 	game.player = *(config->player);
 	init_game(&game);
 	convas = xmp_to_image(game.config->texture, game.mlx);
-	drs_states = t_door_to_double_char();
-	if(!(convas || !drs_states))
-		return(1);
+	if (!convas)
+		return (1);
 	game.convas = *convas;
-	game.doors = drs_states;
 	init_player(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
-	// mlx_hook(game.win, 6, 1L<<6, mouse_move, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);

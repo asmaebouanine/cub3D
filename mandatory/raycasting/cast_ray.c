@@ -6,13 +6,12 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 12:11:37 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:39:28 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-//calcute fixed step distance for the ray to cross the next line x y
 void	init_delta(t_ray *ray)
 {
 	if (ray->ray_dx == 0)
@@ -25,7 +24,7 @@ void	init_delta(t_ray *ray)
 		ray->delta_y = fabs(1.0 / ray->ray_dy);
 }
 
-void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to start moving in the correct direction across the map grid and tells how far the first wall is along each axis.
+void	init_step(t_ray *ray, double pos_x, double pos_y)
 {
 	if (ray->ray_dx < 0)
 	{
@@ -49,10 +48,9 @@ void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to sta
 	}
 }
 
-int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hits a wall
+int	step_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
-	int i;
 
 	hit = 0;
 	while (!hit)
@@ -73,26 +71,12 @@ int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hi
 			|| ray->map_y < 0 || ray->map_y >= game->map->height)
 			return (1);
 		if (game->map->line[ray->map_y][ray->map_x] == '1')
-		{
-			ray->type = 1;
 			hit = 1;
-		}
-		else if(game->map->line[ray->map_y][ray->map_x] == 'D')
-		{
-			i = find_cooresp_dr(game, ray->map_y, ray->map_x);
-			if(game->doors[i]->state == 'c')
-			{
-				ray->type = 2;
-				hit = 2;
-			}
-			else	
-				hit = 0;
-		}
 	}
 	return (hit);
 }
 
-double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the player position to hit the wall using DDA algorithm
+double	cast_ray(t_game *game, t_player *p, t_ray *ray)
 {
 	double	posx;
 	double	posy;
@@ -103,7 +87,7 @@ double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the pl
 	ray->map_x = (int)posx;
 	ray->map_y = (int)posy;
 	init_delta(ray);
-	init_step(ray, posx, posy);//determines the ray direction and calculate the distance between the player and next grid
+	init_step(ray, posx, posy);
 	step_dda(game, ray);
 	if (ray->side == 0)
 		perp_dist = ray->dist_x - ray->delta_x;
@@ -113,4 +97,3 @@ double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the pl
 		perp_dist = 1e-6;
 	return (perp_dist);
 }
-
