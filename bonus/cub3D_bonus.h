@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/09 15:19:52 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/09 21:21:07 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_config
 	t_color		*color;
 	t_player	*player;
 	t_map		*map;
+	char		**anim;
 }	t_config;
 
 typedef struct s_door
@@ -160,6 +161,18 @@ typedef struct s_convas
 	t_texture	textures[5];
 }	t_convas;
 
+typedef struct s_w_texture
+{
+    void *img;
+    int   width;
+    int   height;
+} t_w_texture;
+
+typedef struct s_weapon
+{
+	t_w_texture weapons[25];
+}	t_weapon;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -175,6 +188,7 @@ typedef struct s_game
 	t_config	*config;
 	t_map		*map;
 	t_convas	convas;
+	t_weapon	weapons;
 	t_door		**doors;
 }	t_game;
 
@@ -271,5 +285,7 @@ t_config *config_struct(void);
 t_door	*doors_coordin(int x, int y);
 t_door	*door_struct(void);
 t_door	**t_door_to_double_char(void);
+t_weapon *xmp_t_img_wpn(char **weapons, void *mlx_ptr);
+char	*custom_strdup(const char	*s1, int pid);
 
 #endif

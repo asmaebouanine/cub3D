@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:40 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:43 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/09 20:23:19 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_config *parsser(int argc, char **argv)
     int fd;
     t_config    *config;
     
-
     config = NULL;
     if(argc == 2)
     {

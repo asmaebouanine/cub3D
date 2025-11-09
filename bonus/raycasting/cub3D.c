@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 17:32:16 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/09 21:42:03 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	t_game      game;
 	t_convas    *convas;
 	t_door     **drs_states;
+	t_weapon  *weapons;
 	
 	config = parsser(argc, argv);
 	if (!config)
@@ -79,11 +80,13 @@ int	main(int argc, char **argv)
 	game.player = *(config->player);
 	init_game(&game);
 	convas = xmp_to_image(game.config->texture, game.mlx);
+	weapons = xmp_t_img_wpn(game.config->anim, game.mlx);
 	drs_states = t_door_to_double_char();
-	if(!(convas || !drs_states))
+	if(!(convas || !drs_states) || !weapons)
 		return(1);
 	game.convas = *convas;
 	game.doors = drs_states;
+	game.weapons = *weapons;
 	init_player(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);

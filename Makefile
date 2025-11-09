@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+         #
+#    By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/14 14:59:01 by asbouani          #+#    #+#              #
-#    Updated: 2025/11/08 17:36:10 by asbouani         ###   ########.fr        #
+#    Updated: 2025/11/09 21:23:39 by wnid-hsa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Imlx  -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Imlx  
 
 MLX = -Lmlx -lmlx -lX11 -lXext -lm
 
@@ -32,7 +32,7 @@ SRCS_B = bonus/raycasting/cub3D.c bonus/raycasting/move_player.c bonus/raycastin
 		bonus/parsing/get_next_line.c bonus/parsing/get_next_line_utils.c bonus/parsing/cleaning.c bonus/parsing/map_parssing.c bonus/parsing/custom_func.c bonus/parsing/custom_split.c bonus/parsing/parssing_helpers.c \
 		bonus/parsing/helpers.c bonus/parsing/custom_strjoin.c bonus/parsing/texture_parse.c  bonus/parsing/parssing.c bonus/parsing/parssing_lengh.c bonus/parsing/map_parssing_2.c bonus/parsing/color_parse.c \
 		bonus/parsing/map_parssing_3.c bonus/parsing/alloc_fill.c bonus/parsing/alloc_fill_2.c bonus/texturing/xmp_to_image.c bonus/texturing/texturing_tiles.c bonus/texturing/texturing_helpers.c \
-		bonus/parsing/door_coord.c
+		bonus/parsing/door_coord.c bonus/animations/xpm_to_img_anim.c
 
 OBJCS = $(SRCS:.c=.o)
 
