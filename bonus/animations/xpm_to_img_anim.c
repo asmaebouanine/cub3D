@@ -6,27 +6,50 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 18:57:41 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/10 01:15:18 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 03:14:46 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
 
+void weapon_pixels( t_w_texture *weapon_tex, int start_x, int start_y, t_game *game)
+{
+    int x;
+    int y;
+    char *pixel;
+    unsigned int color;
+    
+    y = 0;
+    if (!weapon_tex || !weapon_tex->img || !weapon_tex->addr)
+        return;
+    while(y < (weapon_tex)->height)
+    {
+        x = 0;
+        while(x < (weapon_tex)->width)
+        {
+           pixel = weapon_tex->addr + (y *(weapon_tex->line_size) + x *(weapon_tex->bpp) / 8);
+            color = *(unsigned int *)pixel; 
+            if (color != 0xFF000000)
+                put_pixel(x + start_x, y + start_y , color, game);
+            x++;
+        }
+        y++;
+    }
+}
+
 void draw_weapon(t_game *game)
 {
-    int frame;
-    t_w_texture *weapon_tex;
-    
-    frame = game->curr_weap;
-    weapon_tex = &game->weapons.weapons[frame];
+    int frame = game->curr_weap; 
+    t_w_texture *weapon_tex = &game->weapons.weapons[frame];
 
     if (weapon_tex->img)
     {
         int x = (game->win_width / 2) - (weapon_tex->width / 2);
         int y = game->win_height - weapon_tex->height;
-        mlx_put_image_to_window(game->mlx, game->win, weapon_tex->img, x, y);
+        weapon_pixels( weapon_tex, x, y, game);
     }
 }
+
 t_w_texture *lst_new_weapon(char *path, void *mlx_ptr)
 {
     t_w_texture *texture;
@@ -37,6 +60,9 @@ t_w_texture *lst_new_weapon(char *path, void *mlx_ptr)
     texture->img = mlx_xpm_file_to_image(mlx_ptr, path, &(texture->width), &(texture->height));
     if(!(texture->img))
         return(NULL);
+    texture->addr = mlx_get_data_addr(texture->img, &(texture->bpp), &(texture->line_size),&(texture->endian));
+    if(!(texture->addr))
+         return(NULL);
     return(texture);
 }
 

@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 01:17:26 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 02:10:54 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,12 @@ typedef struct s_w_texture
     void *img;
     int   width;
     int   height;
+	char	*addr;
+	int		bpp;
+	int		line_size;
+	int		endian;
 } t_w_texture;
+
 
 typedef struct s_weapon
 {
