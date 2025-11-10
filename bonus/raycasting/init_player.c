@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 17:25:57 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/10 04:21:16 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ int	key_press(int keycode, t_game *game)
 		player->key_rot_right = true;
 	if(keycode == 111)
 		door_handling(game);
+	if(keycode == 103)
+		game->attacking = 1;
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)

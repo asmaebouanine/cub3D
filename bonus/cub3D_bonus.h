@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 02:10:54 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 04:30:54 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ typedef struct s_game
 	t_convas	convas;
 	t_weapon	weapons;
 	int  curr_weap;
+	int       attacking;
 	t_door		**doors;
 }	t_game;
 

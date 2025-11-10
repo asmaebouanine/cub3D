@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 18:57:41 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/10 03:14:46 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 04:49:36 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,40 @@ void weapon_pixels( t_w_texture *weapon_tex, int start_x, int start_y, t_game *g
         y++;
     }
 }
+void  attack_handling(t_game *game)
+{
+    int x;
+    int y;
+    t_w_texture *weapon_tex;
 
+    weapon_tex = &game->weapons.weapons[game->curr_weap];
+    if (!weapon_tex || !weapon_tex->img)
+        return;
+
+    x = (game->win_width / 2) - (weapon_tex->width / 2);
+    y = game->win_height - weapon_tex->height;
+
+    weapon_pixels(weapon_tex, x, y, game);
+
+    game->curr_weap++;
+    if (game->curr_weap >= 24)
+    {
+        game->curr_weap = 0;
+        game->attacking = 0;
+    }
+}
 void draw_weapon(t_game *game)
 {
-    int frame = game->curr_weap; 
-    t_w_texture *weapon_tex = &game->weapons.weapons[frame];
-
+    t_w_texture *weapon_tex;
+    
+    if(!game)
+        return;
+    if(game->attacking)
+    {
+        attack_handling(game);
+        return;
+    }
+    weapon_tex = &game->weapons.weapons[0];
     if (weapon_tex->img)
     {
         int x = (game->win_width / 2) - (weapon_tex->width / 2);
