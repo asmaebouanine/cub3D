@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/09 21:21:07 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:17:26 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct s_game
 	t_map		*map;
 	t_convas	convas;
 	t_weapon	weapons;
+	int  curr_weap;
 	t_door		**doors;
 }	t_game;
 
@@ -287,5 +288,6 @@ t_door	*door_struct(void);
 t_door	**t_door_to_double_char(void);
 t_weapon *xmp_t_img_wpn(char **weapons, void *mlx_ptr);
 char	*custom_strdup(const char	*s1, int pid);
+void draw_weapon(t_game *game);
 
 #endif

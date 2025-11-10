@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/09 21:42:03 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:18:41 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	draw_loop(t_game *game)
 	}
 	minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	draw_weapon(game);
 	return 0;
 }
 
@@ -78,6 +79,7 @@ int	main(int argc, char **argv)
 	game.config = config;
 	game.map = config->map;
 	game.player = *(config->player);
+	game.curr_weap = 0;
 	init_game(&game);
 	convas = xmp_to_image(game.config->texture, game.mlx);
 	weapons = xmp_t_img_wpn(game.config->anim, game.mlx);

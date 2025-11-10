@@ -6,13 +6,27 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 18:57:41 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/09 21:37:07 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:15:18 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
 
+void draw_weapon(t_game *game)
+{
+    int frame;
+    t_w_texture *weapon_tex;
+    
+    frame = game->curr_weap;
+    weapon_tex = &game->weapons.weapons[frame];
 
+    if (weapon_tex->img)
+    {
+        int x = (game->win_width / 2) - (weapon_tex->width / 2);
+        int y = game->win_height - weapon_tex->height;
+        mlx_put_image_to_window(game->mlx, game->win, weapon_tex->img, x, y);
+    }
+}
 t_w_texture *lst_new_weapon(char *path, void *mlx_ptr)
 {
     t_w_texture *texture;
