@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/09 14:20:51 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:05:41 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_position(t_game *game, char **map)
 	t_player	*p;
 	int			y;
 	int			x;
-	
+
 	if (!game)
 		return ;
 	p = &(game->player);
@@ -91,7 +91,7 @@ void	init_player(t_game *g)
 int	key_release(int keycode, t_game *game)
 {
 	t_player	*player;
-	
+
 	player = &(game->player);
 	if (keycode == LEFT_ARROW)
 		player->key_rot_left = false;

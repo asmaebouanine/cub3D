@@ -6,13 +6,12 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 17:25:45 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:21:38 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
 
-//calcute fixed step distance for the ray to cross the next line x y
 void	init_delta(t_ray *ray)
 {
 	if (ray->ray_dx == 0)
@@ -25,7 +24,7 @@ void	init_delta(t_ray *ray)
 		ray->delta_y = fabs(1.0 / ray->ray_dy);
 }
 
-void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to start moving in the correct direction across the map grid and tells how far the first wall is along each axis.
+void	init_step(t_ray *ray, double pos_x, double pos_y)
 {
 	if (ray->ray_dx < 0)
 	{
@@ -48,8 +47,7 @@ void	init_step(t_ray *ray, double pos_x, double pos_y) //prepares the ray to sta
 		ray->dist_y = (ray->map_y + 1.0 - pos_y) * ray->delta_y;
 	}
 }
-
-int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hits a wall
+int	step_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
 	int i;
@@ -92,18 +90,18 @@ int	step_dda(t_game *game, t_ray *ray) // moves the ray cell by cell until it hi
 	return (hit);
 }
 
-double	cast_ray(t_game *game, t_player *p,t_ray *ray) //shoots a ray form the player position to hit the wall using DDA algorithm
+double	cast_ray(t_game *game, t_player *p, t_ray *ray)
 {
 	double	posx;
 	double	posy;
 	double	perp_dist;
-	
+
 	posx = p->x / (double)SIZE;
 	posy = p->y / (double)SIZE;
 	ray->map_x = (int)posx;
 	ray->map_y = (int)posy;
 	init_delta(ray);
-	init_step(ray, posx, posy);//determines the ray direction and calculate the distance between the player and next grid
+	init_step(ray, posx, posy);
 	step_dda(game, ray);
 	if (ray->side == 0)
 		perp_dist = ray->dist_x - ray->delta_x;

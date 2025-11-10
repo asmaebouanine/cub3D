@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/09 11:48:34 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/10 16:58:03 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	clear_image(t_game *game)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	while (x < game->win_width)
 	{
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 	t_game		game;
 	t_config	*config;
 	t_convas	*convas;
-	
+
 	config = parsser(argc, argv);
 	if (!config)
 		return (0);

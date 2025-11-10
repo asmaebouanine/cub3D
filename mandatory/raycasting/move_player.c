@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/09 14:26:28 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:16:28 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_press(int keycode, t_game *game)
 {
 	t_player	*player;
-	
+
 	player = &(game->player);
 	if (keycode == LEFT_ARROW)
 		player->key_rot_left = true;
@@ -34,17 +34,13 @@ int	key_press(int keycode, t_game *game)
 	return (0);
 }
 
-void	check_and_move(t_game *game, char **map, double new_x, double new_y)
+void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 {
 	int	row_map;
 	int	col_map;
 	int	new_col;
 	int	new_row;
-	t_player	*p;
-	
-	if (!game)
-		return ;
-	p = &(game->player);
+
 	row_map = (int)(p->y / SIZE);
 	col_map = (int)(p->x / SIZE);
 	new_row = (int)(new_y / SIZE);
@@ -54,26 +50,26 @@ void	check_and_move(t_game *game, char **map, double new_x, double new_y)
 	if (map[new_row][col_map] != '1')
 		p->y = new_y;
 }
-	
+
 void	handle_movement(t_game *game, char **map, double speed)
 {
 	double		new_x;
 	double		new_y;
 	t_player	*p;
-	
+
 	if (!game)
 		return ;
 	p = &(game->player);
 	new_x = p->x;
 	new_y = p->y;
 	if (p->key_up)
-		check_and_move(game, map, new_x + p->dx * speed, new_y + p->dy * speed);
+		check_and_move(p, map, new_x + p->dx * speed, new_y + p->dy * speed);
 	if (p->key_down)
-		check_and_move(game, map, new_x - p->dx * speed, new_y - p->dy * speed);
+		check_and_move(p, map, new_x - p->dx * speed, new_y - p->dy * speed);
 	if (p->key_left)
-		check_and_move(game, map, new_x + p->dy * speed, new_y - p->dx * speed);
+		check_and_move(p, map, new_x + p->dy * speed, new_y - p->dx * speed);
 	if (p->key_right)
-		check_and_move(game, map, new_x - p->dy * speed, new_y + p->dx * speed);
+		check_and_move(p, map, new_x - p->dy * speed, new_y + p->dx * speed);
 }
 
 void	rotate_player(t_player *p, double rot_speed)
