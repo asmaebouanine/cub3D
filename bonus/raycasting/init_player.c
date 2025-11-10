@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 04:21:16 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:26:31 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
+
+void	set_west(t_player *p)
+{
+	p->dx = -1;
+	p->dy = 0;
+	p->plane_x = 0;
+	p->plane_y = -0.6;
+}
 
 void	init_direction(t_player *p, char dir)
 {
@@ -36,12 +44,7 @@ void	init_direction(t_player *p, char dir)
 		p->plane_y = 0.66;
 	}
 	if (dir == 'W')
-	{
-		p->dx = -1;
-		p->dy = 0;
-		p->plane_x = 0;
-		p->plane_y = -0.66;
-	}
+		set_west(p);
 }
 
 void	init_position(t_game *game, char **map)

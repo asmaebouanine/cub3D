@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/08 17:26:13 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:29:18 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,21 @@ void	rotate_player(t_player *p, double rot_speed)
 	sin_r = sin(rot_speed);
 	old_dx = p->dx;
 	old_plane_x = p->plane_x;
-	// Rotate direction vector
 	p->dx = p->dx * cos_r - p->dy * sin_r;
 	p->dy = old_dx * sin_r + p->dy * cos_r;
-	// Rotate camera plane
 	p->plane_x = p->plane_x * cos_r - p->plane_y * sin_r;
 	p->plane_y = old_plane_x * sin_r + p->plane_y * cos_r;
 }
 
 void	move_player(t_game *game, char **map)
 {
-	double	speed;
-	t_player *p;
+	t_player	*p;
+	double		speed;
 
-	if(!game)
-		return;
+	if (!game)
+		return ;
 	speed = 10;
-	p =&(game->player);
+	p = &(game->player);
 	if (p->key_rot_left)
 		rotate_player(p, p->rot_step);
 	if (p->key_rot_right)
