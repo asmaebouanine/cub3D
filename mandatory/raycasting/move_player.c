@@ -6,11 +6,30 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/02 12:46:25 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:47:23 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
+int	key_press(int keycode, t_player *player)
+{
+	if (keycode == LEFT_ARROW)
+		player->key_rot_left = true;
+	if (keycode == RIGHT_ARROW)
+		player->key_rot_right = true;
+	if (keycode == W)
+		player->key_up = true;
+	if (keycode == S)
+		player->key_down = true;
+	if (keycode == A)
+		player->key_left = true;
+	if (keycode == D)
+		player->key_right = true;
+	if (keycode == ESC)
+		exit (1);
+	return (0);
+}
 
 void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 {
@@ -33,7 +52,7 @@ void	handle_movement(t_player *p, char **map, double speed)
 {
 	double	new_x;
 	double	new_y;
-	
+
 	new_x = p->x;
 	new_y = p->y;
 	if (p->key_up)
@@ -57,10 +76,8 @@ void	rotate_player(t_player *p, double rot_speed)
 	sin_r = sin(rot_speed);
 	old_dx = p->dx;
 	old_plane_x = p->plane_x;
-	// Rotate direction vector
 	p->dx = p->dx * cos_r - p->dy * sin_r;
 	p->dy = old_dx * sin_r + p->dy * cos_r;
-	// Rotate camera plane
 	p->plane_x = p->plane_x * cos_r - p->plane_y * sin_r;
 	p->plane_y = old_plane_x * sin_r + p->plane_y * cos_r;
 }
@@ -76,4 +93,3 @@ void	move_player(t_player *p, char **map)
 		rotate_player(p, -p->rot_step);
 	handle_movement(p, map, speed);
 }
-

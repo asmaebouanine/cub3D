@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 12:25:14 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:35:57 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,6 @@ void	init_player(t_game *g)
 	g->player.rot_step = 0.05;
 }
 
-int	key_press(int keycode, t_player *player)
-{
-	if (keycode == LEFT_ARROW)
-		player->key_rot_left = true;
-	if (keycode == RIGHT_ARROW)
-		player->key_rot_right = true;
-	if (keycode == W)
-		player->key_up = true;
-	if (keycode == S)
-		player->key_down = true;
-	if (keycode == A)
-		player->key_left = true;
-	if (keycode == D)
-		player->key_right = true;
-	if (keycode == ESC || keycode == X)
-		exit (1);
-	return (0);
-}
-
 int	key_release(int keycode, t_player *player)
 {
 	if (keycode == LEFT_ARROW)
@@ -119,4 +100,3 @@ int	key_release(int keycode, t_player *player)
 		player->key_right = false;
 	return (0);
 }
-
