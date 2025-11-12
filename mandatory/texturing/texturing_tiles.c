@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:12:34 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/12 11:11:37 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:03:50 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void draw_floor_and_ceiling(t_game *game, int x)
     {
         
         if (y < game->win_height / 2)
-            put_pixel(x, y,0x000000, game);
+            put_pixel(x, y,game->config->color->c_color, game);
         else 
-            put_pixel(x, y,0x250015 ,game);
+            put_pixel(x, y, game->config->color->f_color,game);
         
         y++;
     }
