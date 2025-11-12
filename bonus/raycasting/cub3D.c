@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/11 22:49:14 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:08:50 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,15 @@ int	main(int argc, char **argv)
 	t_config    *config;
 	t_game      game;
 	
+	
 	config = parsser(argc, argv);
 	if (!config)
-		return (0);
+	return (0);
 	game.config = config;
 	game.map = config->map;
 	game.player = *(config->player);
 	game.curr_weap = 0;
 	game.attacking = 0;
-	init_game(&game);
+	init_game(&game);		
 	return(main_entering(&game));
 }

@@ -6,7 +6,7 @@
 #    By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/14 14:59:01 by asbouani          #+#    #+#              #
-#    Updated: 2025/11/12 12:22:02 by wnid-hsa         ###   ########.fr        #
+#    Updated: 2025/11/12 13:08:03 by wnid-hsa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Imlx -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Imlx #-fsanitize=address
 
 MLX = -Lmlx -lmlx -lX11 -lXext -lm
 
