@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/11 23:57:16 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/12 21:05:52 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,8 +215,13 @@ void	move_player(t_game *game, char **map);
 void	rotate_player(t_player *p, double rot_speed);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
-int     mouse_move(int x, int y, t_game *game);
+int     mouse_control(int x, int y, t_game *game);
 void    minimap(t_game *game);
+int		close_window(void *param);
+
+void	draw_player(t_game *game);
+void	door_handling(t_game *game);
+void	check_and_move(t_game *game, char **map, double new_x, double new_y);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*gcmalloc(size_t size, int status_flag);

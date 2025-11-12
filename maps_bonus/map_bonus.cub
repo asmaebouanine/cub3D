@@ -4,8 +4,8 @@ WE ./textures/west_texture.xpm
 EA ./textures/east_texture.xpm
 DO ./textures/door_texture.xpm
 
-F 220,100,0
-C 225,30,0
+F 0,0,0
+C 0,0,0
 
 11111111111111
 100000000000001

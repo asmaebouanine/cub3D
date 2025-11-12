@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 15:38:06 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 18:01:00 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	clear_image(t_game *game)
 	}
 }
 
-int	draw_loop(t_game *game)
+int	game_loop(t_game *game)
 {
 	int	x;
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
 	mlx_hook(game.win, 17, 0, close_window, &game);
-	mlx_loop_hook(game.mlx, draw_loop, &game);
+	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
