@@ -6,13 +6,14 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 18:57:41 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/10 04:49:36 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/12 00:24:16 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
 
-void weapon_pixels( t_w_texture *weapon_tex, int start_x, int start_y, t_game *game)
+void weapon_pixels( t_w_texture *weapon_tex,
+             int start_x, int start_y, t_game *game)
 {
     int x;
     int y;
@@ -27,7 +28,8 @@ void weapon_pixels( t_w_texture *weapon_tex, int start_x, int start_y, t_game *g
         x = 0;
         while(x < (weapon_tex)->width)
         {
-           pixel = weapon_tex->addr + (y *(weapon_tex->line_size) + x *(weapon_tex->bpp) / 8);
+           pixel = weapon_tex->addr 
+                    + (y *(weapon_tex->line_size) + x *(weapon_tex->bpp) / 8);
             color = *(unsigned int *)pixel; 
             if (color != 0xFF000000)
                 put_pixel(x + start_x, y + start_y , color, game);
@@ -36,6 +38,7 @@ void weapon_pixels( t_w_texture *weapon_tex, int start_x, int start_y, t_game *g
         y++;
     }
 }
+
 void  attack_handling(t_game *game)
 {
     int x;
@@ -85,10 +88,12 @@ t_w_texture *lst_new_weapon(char *path, void *mlx_ptr)
     texture = gcmalloc(sizeof(t_w_texture),0);
     if(!path || !texture)
         return(NULL);
-    texture->img = mlx_xpm_file_to_image(mlx_ptr, path, &(texture->width), &(texture->height));
+    texture->img = mlx_xpm_file_to_image(mlx_ptr, 
+                path, &(texture->width), &(texture->height));
     if(!(texture->img))
         return(NULL);
-    texture->addr = mlx_get_data_addr(texture->img, &(texture->bpp), &(texture->line_size),&(texture->endian));
+    texture->addr = mlx_get_data_addr(texture->img,
+                 &(texture->bpp), &(texture->line_size),&(texture->endian));
     if(!(texture->addr))
          return(NULL);
     return(texture);

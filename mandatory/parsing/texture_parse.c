@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:45 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:29:49 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:37:56 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int is_texture(char *str, t_identifiers *identifiers)
     if(!ft_strcmp(str,"NO") 
         || !ft_strcmp(str, "SO") 
         || !ft_strcmp(str, "WE") 
-        || !ft_strcmp(str, "EA") 
-        || !ft_strcmp(str, "DO"))
+        || !ft_strcmp(str, "EA"))
     {
         if(!ft_strcmp(str, "NO"))
             identifiers->no++;
@@ -28,9 +27,8 @@ int is_texture(char *str, t_identifiers *identifiers)
             identifiers->we++;
         else if(!ft_strcmp(str, "EA"))
             identifiers->ea++;
-        else if(!ft_strcmp(str, "DO"))
-            identifiers->doo++;
-        if(identifiers->no > 1 || identifiers->so > 1 ||  identifiers->we > 1 || identifiers->ea > 1 || identifiers->doo > 1)
+        if(identifiers->no > 1 || identifiers->so > 1
+                 ||  identifiers->we > 1 || identifiers->ea > 1)
             return(0);
         return(1);
     }
@@ -55,25 +53,11 @@ int parse_sec_text(char *str)
         return(0);
 }
 
-int valid_texture(char *str) 
+int valid_texture_2(char *path)
 {
-    int len;
-    char *path;
-    char *rest;
-    char **splitted;
     int fd;
+    int len;
     
-    len = ft_strlen(str);
-    if(!len)
-        return(0);
-    rest = ft_strnstr(str, ".xpm", len);
-    if(!rest)
-        return(0);
-    splitted = custom_split(rest,' ', 0);
-    if(!splitted || !splitted[0] ||splitted[1])
-        return(0);
-    else
-        path = ft_strtrim(str, " \n");
     if(!path)
         return(0);
     len = ft_strlen(path);
@@ -86,11 +70,53 @@ int valid_texture(char *str)
         return(len);
 }
 
+int valid_texture(char *str) 
+{
+    int len;
+    char *path;
+    char *rest;
+    char **splitted;
+    // int fd;
+    
+    len = ft_strlen(str);
+    if(!len)
+        return(0);
+    rest = ft_strnstr(str, ".xpm", len);
+    if(!rest)
+        return(0);
+    splitted = custom_split(rest,' ', 0);
+    if(!splitted || !splitted[0] ||splitted[1])
+        return(0);
+    else
+        path = ft_strtrim(str, " \n");
+    return(valid_texture_2(path));
+}
+
+int parse_texture_2(char **splitted, char *str, int i)
+{
+    int len;
+    
+    len = valid_texture(str + i);
+    if(len)
+    {
+        if(!ft_strcmp(splitted[0], "NO"))
+            no_tex_len(len);
+        else if(!ft_strcmp(splitted[0], "WE"))
+            we_tex_len(len);
+        else if(!ft_strcmp(splitted[0], "SO"))
+            so_tex_len(len);
+        else if(!ft_strcmp(splitted[0], "EA"))
+            ea_tex_len(len);
+        return(1);
+    } 
+    return(0);
+}
+
 int parse_texture(char **splitted, char *trimmed)
 {
     int i;
     char *str;
-    int len;
+    // int len;
 
     i = 0;
     if(!splitted[0] || !splitted[1])
@@ -104,21 +130,8 @@ int parse_texture(char **splitted, char *trimmed)
         {
             i++;
         }
-        len = valid_texture(str + i);
-        if(len)
-        {
-            if(!ft_strcmp(splitted[0], "NO"))
-                no_tex_len(len);
-            else if(!ft_strcmp(splitted[0], "WE"))
-                we_tex_len(len);
-            else if(!ft_strcmp(splitted[0], "SO"))
-                so_tex_len(len);
-            else if(!ft_strcmp(splitted[0], "EA"))
-                ea_tex_len(len);
-            else if(!ft_strcmp(splitted[0], "DO"))
-                do_tex_len(len);
+        if(parse_texture_2(splitted, str, i) == 1)
             return(1);
-        } 
     }
     return(0); 
 }

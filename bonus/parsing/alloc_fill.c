@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:04 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/09 20:52:08 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:58:20 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,37 +69,42 @@ char **anim_alloc(void)
     anim[24] = NULL;
     return(anim);
 }
-
+void fill_map_tex(t_config    **config)
+{
+    (*config)->map = alloc_map();
+    if(!((*config)->map))
+            return;
+    (*config)->color = gcmalloc(sizeof(t_color), 0);
+    if(!((*config)->color))
+        return;
+   (*config)->texture = gcmalloc(6 *(sizeof(char *)), 0);
+    if(!((*config)->texture))
+        return;
+    (*config)->texture[0] = gcmalloc(no_tex_len(-1), 0);
+    if(!((*config)->texture[0]))
+        return;
+    (*config)->texture[1] = gcmalloc(we_tex_len(-1) , 0);
+    if(!((*config)->texture[1]))
+        return;
+    (*config)->texture[2] = gcmalloc(so_tex_len(-1), 0);
+    if(!((*config)->texture[2]))
+        return;
+    (*config)->texture[3] = gcmalloc(ea_tex_len(-1) , 0);
+    if(!((*config)->texture[3]))
+        return;
+}
 t_config *config_struct(void)
 {
     t_config    *config;
     
     config = gcmalloc(sizeof(t_config), 0);
-    if (!config)
-        return(NULL);
-    else
+    if(config)
     {
-        config->map = alloc_map();
-        if(!config->map)
-            return(NULL);
-        config->color = gcmalloc(sizeof(t_color), 0);
-        if(!config->color)
-             return(NULL);
-        config->texture = gcmalloc(6 *(sizeof(char *)), 0);
-        if(!config->texture)
-            return(NULL);
-        config->texture[0] = gcmalloc(no_tex_len(-1), 0);
-        if(!config->texture[0])
-            return(NULL);
-        config->texture[1] = gcmalloc(we_tex_len(-1) , 0);
-        if(!config->texture[1])
-            return(NULL);
-        config->texture[2] = gcmalloc(so_tex_len(-1), 0);
-        if(!config->texture[2])
-            return(NULL);
-        config->texture[3] = gcmalloc(ea_tex_len(-1) , 0);
-        if(!config->texture[3])
-            return(NULL);
+        fill_map_tex(&config);
+        if(!config->map ||!config->color || !config->texture 
+            ||!config->texture[0] || !config->texture[1] 
+            || !config->texture[2] ||!config->texture[3] )
+          return(NULL);
         if(do_tex_len(-1))
         {
             config->texture[4] = gcmalloc(do_tex_len(-1) , 0);
@@ -129,8 +134,6 @@ t_map *alloc_map(void)
     map = gcmalloc(sizeof(t_map), 0);
     if (!map)
         return (NULL);
-
-        //add: initialize the width and the height of the map
     map->width = len;
     map->height = width_;
     map->line = gcmalloc((width_ + 1) * sizeof(char *), 0);

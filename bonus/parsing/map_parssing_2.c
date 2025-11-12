@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parssing_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:11 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:19 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:26:51 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int space_valid_adj(char c)
 
 int is_valid_char(char c, char *line, int i)
 {
-    if(c == '0' || c == '1' || (c == 'D' && ( i+1 < ft_strlen(line))&& line[i+1] != 'O' ) || (( i+1 < ft_strlen(line)) 
+    if(c == '0' || c == '1' 
+            || (c == 'D' && ( i+1 < ft_strlen(line))&& line[i+1] != 'O' ) 
+            || (( i+1 < ft_strlen(line)) 
             && (c == 'N' || c == 'S') && line[i+1] != 'O')  
             || (c == 'E' && ( i+1 < ft_strlen(line))&& line[i+1] != 'A')
             ||( c == 'W' && ( i+1 < ft_strlen(line))&& line[i+1] != 'E') 
@@ -48,17 +50,19 @@ int valid_map_chars(char *line)
 
 int space_checking(t_plines *res, int i)
 {
-  
     if(( res->line && (i + 1 < ft_strlen(res->line))
         &&(!space_valid_adj(res->line[i+1]))) 
         || (res->line && (i - 1 >= 0) && !space_valid_adj(res->line[i-1]))
         || ( res->prev && !space_valid_adj(res->prev[i]))
         || ( res->next && !space_valid_adj(res->next[i])))
+        {
+            
             return(0);
+        }
     else
         return(1);
-    
 }
+    
 
 int max_len(char *prev_line, char *next, char *line)
 {

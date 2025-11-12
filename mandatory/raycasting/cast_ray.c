@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 16:51:14 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:16:57 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ int	step_dda(t_game *game, t_ray *ray)
 	return (hit);
 }
 
-double	cast_ray(t_game *game, t_player *p, t_ray *ray)
+double	cast_ray(t_game *game, t_player *p,t_ray *ray)
 {
 	double	posx;
 	double	posy;
 	double	perp_dist;
-
+	
 	posx = p->x / (double)SIZE;
 	posy = p->y / (double)SIZE;
 	ray->map_x = (int)posx;
@@ -97,3 +97,4 @@ double	cast_ray(t_game *game, t_player *p, t_ray *ray)
 		perp_dist = 1e-6;
 	return (perp_dist);
 }
+

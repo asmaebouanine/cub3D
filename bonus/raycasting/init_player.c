@@ -3,15 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 18:26:31 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 12:24:18 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
 
+// void	init_direction(t_player *p, char dir)
+// {
+// 	if (dir == 'N')
+// 	{
+// 		p->dx = 0;
+// 		p->dy = -1;
+// 		p->plane_x = 0.66;
+// 		p->plane_y = 0;
+// 	}
+// 	if (dir == 'S')
+// 	{
+// 		p->dx = 0;
+// 		p->dy = 1;
+// 		p->plane_x = -0.66;
+// 		p->plane_y = 0;
+// 	}
+// 	if (dir == 'E')
+// 	{
+// 		p->dx = 1;
+// 		p->dy = 0;
+// 		p->plane_x = 0;
+// 		p->plane_y = 0.66;
+// 	}
+// 	if (dir == 'W')
+// 	{
+// 		p->dx = -1;
+// 		p->dy = 0;
+// 		p->plane_x = 0;
+// 		p->plane_y = -0.66;
+// 	}
+// }
 void	set_west(t_player *p)
 {
 	p->dx = -1;
@@ -98,7 +129,8 @@ int find_cooresp_dr(t_game *game, int map_y, int map_x)
 		return(0);
 	while(game->doors[i])
 	{
-		if((game->doors[i]->door_x == map_x )&& (game->doors[i]->door_y == map_y))
+		if((game->doors[i]->door_x == map_x )
+			&& (game->doors[i]->door_y == map_y))
 			return(i);
 		i++;
 	}
@@ -116,8 +148,8 @@ void door_handling(t_game *game)
 	
 	player_map_x = (double)game->player.x / (double)SIZE;
 	player_map_y = (double)game->player.y / (double)SIZE;
-	check_x = player_map_x + game->player.dx * 1.5;
-	check_y = player_map_y + game->player.dy * 1.5;
+	check_x = player_map_x + game->player.dx * 0.5;
+	check_y = player_map_y + game->player.dy * 0.5;
 	map_x = (int)check_x;
 	map_y = (int)check_y;
 	if (map_y < 0 || map_y >= game->map->height

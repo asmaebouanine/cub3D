@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:07:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 18:21:38 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:47:19 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
 
+//calcute fixed step distance for the ray to cross the next line x y
 void	init_delta(t_ray *ray)
 {
 	if (ray->ray_dx == 0)
@@ -47,10 +48,30 @@ void	init_step(t_ray *ray, double pos_x, double pos_y)
 		ray->dist_y = (ray->map_y + 1.0 - pos_y) * ray->delta_y;
 	}
 }
+void step_dda_2(t_game *game, t_ray *ray, int *hit)
+{
+	int i;
+	
+	if (game->map->line[ray->map_y][ray->map_x] == '1')
+	{
+		ray->type = 1;
+		*hit = 1;
+	}
+	else if(game->map->line[ray->map_y][ray->map_x] == 'D')
+	{
+		i = find_cooresp_dr(game, ray->map_y, ray->map_x);
+		if(game->doors[i]->state == 'c')
+		{
+			ray->type = 2;
+			*hit = 2;
+		}
+		else	
+			*hit = 0;
+	}
+}
 int	step_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
-	int i;
 
 	hit = 0;
 	while (!hit)
@@ -70,32 +91,17 @@ int	step_dda(t_game *game, t_ray *ray)
 		if (ray->map_x < 0 || ray->map_x >= game->map->width
 			|| ray->map_y < 0 || ray->map_y >= game->map->height)
 			return (1);
-		if (game->map->line[ray->map_y][ray->map_x] == '1')
-		{
-			ray->type = 1;
-			hit = 1;
-		}
-		else if(game->map->line[ray->map_y][ray->map_x] == 'D')
-		{
-			i = find_cooresp_dr(game, ray->map_y, ray->map_x);
-			if(game->doors[i]->state == 'c')
-			{
-				ray->type = 2;
-				hit = 2;
-			}
-			else	
-				hit = 0;
-		}
+		step_dda_2(game, ray, &hit);
 	}
 	return (hit);
 }
 
-double	cast_ray(t_game *game, t_player *p, t_ray *ray)
+double	cast_ray(t_game *game, t_player *p,t_ray *ray)
 {
 	double	posx;
 	double	posy;
 	double	perp_dist;
-
+	
 	posx = p->x / (double)SIZE;
 	posy = p->y / (double)SIZE;
 	ray->map_x = (int)posx;

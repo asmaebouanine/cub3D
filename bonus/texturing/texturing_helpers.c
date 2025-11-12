@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   texturing_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:20:22 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:26:24 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/11 23:55:26 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../cub3D_bonus.h"
 
-unsigned int apply_shading(unsigned int color, double dist)
+unsigned int apply_shading(unsigned int color)
 {
     double darkness;
     int r;
     int g;
     int b;
     
-    darkness = 1.0 / (1.0 + dist * 0.1); 
+    darkness = 1.0 / (1.0 + save_distance(-1) * 0.1); 
     r = (int)(((color >> 16) & 0xFF) * darkness);
     g = (int)(((color >> 8) & 0xFF) * darkness);
     b = (int)((color & 0xFF) * darkness);

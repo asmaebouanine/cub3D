@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parssing_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:02:37 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:22 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:30:40 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int vertical_checking(t_plines *res, int i)
     bool behind;
     bool front;
 
-    behind = res->line &&(i + 1 < ft_strlen(res->line)) &&(res->line[i+1] == '1');
-    front = ( res->line &&(i - 1 >= 0) && res->line[i-1] == '1');
+    behind = (res->line 
+                    &&(i + 1 < ft_strlen(res->line))
+                         &&(res->line[i+1] == '1'));
+    front = ( res->line 
+            &&(i - 1 >= 0) 
+            && res->line[i-1] == '1');
     if(behind && front)
         return(1);
     else

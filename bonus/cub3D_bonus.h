@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 04:30:54 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/11 23:57:16 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,14 @@ typedef struct s_game
 	t_door		**doors;
 }	t_game;
 
+typedef struct s_tex_coor
+{
+	int tex_x;
+    double step;
+    double tex_pos;
+    int tex_y;
+} t_tex_cood;
+
 double	cast_ray(t_game *game, t_player *p, t_ray *ray);
 void	put_pixel(int x, int y, int color, t_game *game);
 void	render_column(t_game *game, int x);
@@ -217,7 +225,7 @@ void	fill_config_struct(char *file, t_config **config);
 void	texture_filler(char *line, t_config **config);
 void	texture_filler(char *line, t_config **config);
 void	map_filler(int fd, char *first_line, t_config **config);
-void	draw_wall(int x, t_line *line, t_game *game, t_ray *ray, double dist);
+void	draw_wall(int x, t_line *line, t_game *game, t_ray *ray);
 void	draw_floor_and_ceiling(t_game *game, int x);
 void	calc_wall(t_game *game, t_ray *ray, double dist, t_line *line);
 void	wallx_call(t_game *game, t_ray *ray, double dist);
@@ -254,7 +262,7 @@ int		valid_texture(char *str);
 int		parse_sec_text(char *str);
 int		ea_tex_len(int len);
 int		no_tex_len(int len);
-int		so_tex_len(int len);
+int		so_tex_len(int len);  
 int		we_tex_len(int len);
 int		is_color(char *str, t_identifiers *identifiers);
 int		color_validation(char *color);
@@ -279,7 +287,7 @@ int		do_tex_len(int len);
 int		find_cooresp_dr(t_game *game, int map_y, int map_x);
 int		is_identifier(char *str);
 unsigned int get_texture_color(t_texture *tex, int x, int y);
-unsigned int apply_shading(unsigned int color, double dist);
+unsigned int apply_shading(unsigned int color);
 t_map	*alloc_map(void);
 size_t	ft_strlen2(const char *str, char *temp);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
@@ -294,6 +302,7 @@ t_door	*door_struct(void);
 t_door	**t_door_to_double_char(void);
 t_weapon *xmp_t_img_wpn(char **weapons, void *mlx_ptr);
 char	*custom_strdup(const char	*s1, int pid);
-void draw_weapon(t_game *game);
+void 	draw_weapon(t_game *game);
+int 	save_distance(double dist);
 
 #endif

@@ -6,33 +6,11 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 18:16:28 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/02 12:46:25 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-
-int	key_press(int keycode, t_game *game)
-{
-	t_player	*player;
-
-	player = &(game->player);
-	if (keycode == LEFT_ARROW)
-		player->key_rot_left = true;
-	if (keycode == RIGHT_ARROW)
-		player->key_rot_right = true;
-	if (keycode == W)
-		player->key_up = true;
-	if (keycode == S)
-		player->key_down = true;
-	if (keycode == A)
-		player->key_left = true;
-	if (keycode == D)
-		player->key_right = true;
-	if (keycode == ESC || keycode == X)
-		exit (1);
-	return (0);
-}
 
 void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 {
@@ -51,15 +29,11 @@ void	check_and_move(t_player *p, char **map, double new_x, double new_y)
 		p->y = new_y;
 }
 
-void	handle_movement(t_game *game, char **map, double speed)
+void	handle_movement(t_player *p, char **map, double speed)
 {
-	double		new_x;
-	double		new_y;
-	t_player	*p;
-
-	if (!game)
-		return ;
-	p = &(game->player);
+	double	new_x;
+	double	new_y;
+	
 	new_x = p->x;
 	new_y = p->y;
 	if (p->key_up)
@@ -83,24 +57,23 @@ void	rotate_player(t_player *p, double rot_speed)
 	sin_r = sin(rot_speed);
 	old_dx = p->dx;
 	old_plane_x = p->plane_x;
+	// Rotate direction vector
 	p->dx = p->dx * cos_r - p->dy * sin_r;
 	p->dy = old_dx * sin_r + p->dy * cos_r;
+	// Rotate camera plane
 	p->plane_x = p->plane_x * cos_r - p->plane_y * sin_r;
 	p->plane_y = old_plane_x * sin_r + p->plane_y * cos_r;
 }
 
-void	move_player(t_game *game, char **map)
+void	move_player(t_player *p, char **map)
 {
-	t_player	*p;
-	double		speed;
+	double	speed;
 
-	if (!game)
-		return ;
 	speed = 10;
-	p = &(game->player);
 	if (p->key_rot_left)
 		rotate_player(p, p->rot_step);
 	if (p->key_rot_right)
 		rotate_player(p, -p->rot_step);
-	handle_movement(game, map, speed);
+	handle_movement(p, map, speed);
 }
+

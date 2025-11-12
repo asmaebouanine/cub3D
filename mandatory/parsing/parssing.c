@@ -3,24 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   parssing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:40 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:29:46 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:32:22 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../cub3D.h"
 
-t_config *parsser(int argc, char **argv)
+int valid_extension(char *argv)
 {
-    int fd;
-    t_config    *config;
+    int len;
     
-
-    config = NULL;
-    if(argc == 2)
+    if(!argv)
+        return(0);
+    len = ft_strlen(argv);
+    if((argv+len -4) && !ft_strcmp(argv+len -4,".cub"))
+        return(1);
+    else
+        return(0);
+    
+}
+t_config *parsser_core(int argc, char **argv, t_config **config)
+{
+    int fd ;
+    
+    if(argc == 2 && valid_extension(argv[1]))
     {
         fd = open(argv[1], O_RDONLY);
         if(fd >= 0)
@@ -32,9 +42,9 @@ t_config *parsser(int argc, char **argv)
             }
             else
             {
-                config = config_struct();
-                if(config)
-                    fill_config_struct(argv[1], &config); 
+                *config = config_struct();
+                if(*config)
+                    fill_config_struct(argv[1], config); 
             }
         }
         else
@@ -42,9 +52,26 @@ t_config *parsser(int argc, char **argv)
     }
     else
         printf("enter a valid map/config file\n");
-    return(config);
+    return(*config);
 }
 
+t_config *parsser(int argc, char **argv)
+{
+    t_config    *config;
+    
+    config = NULL;
+    return(parsser_core(argc, argv, &config));
+}
+
+int config_parsser_2(char **splitted,char *trimmed, t_identifiers *identifiers)
+{
+     if(is_texture(splitted[0], identifiers) == 1)
+        return(parse_texture(splitted,trimmed));
+    else if(is_color(splitted[0], identifiers) == 1)
+        return(parse_color((trimmed + 1)));
+    else
+        return(0);
+}
 int config_parsser(char *line, t_identifiers *identifiers)
 {
     char **splitted;
@@ -61,18 +88,9 @@ int config_parsser(char *line, t_identifiers *identifiers)
     if(!splitted)
         return(0);
     if(is_identifier(splitted[0]) == 0)
-    return(0); 
+        return(0); 
     else
-    {
-        if(is_texture(splitted[0], identifiers) == 1)
-            return(parse_texture(splitted,trimmed));
-        else if(is_color(splitted[0], identifiers) == 1)
-        {
-            return(parse_color((trimmed + 1)));
-        }
-        else
-            return(0);
-    }
+        return(config_parsser_2(splitted,trimmed, identifiers));
 }
 
 int after_map_parse(char *line)
@@ -131,7 +149,6 @@ int parssing(int fd)
     identifiers->so = 0;
     identifiers->we = 0;
     identifiers->ea = 0;
-    identifiers->doo = 0;
     identifiers->f = 0;
     identifiers->c = 0;
     return(parssing_core(fd, identifiers));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/10 17:05:41 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 12:25:14 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,11 @@ void	init_direction(t_player *p, char dir)
 		set_west(p);
 }
 
-void	init_position(t_game *game, char **map)
+void	init_position(t_player *p, char **map)
 {
-	t_player	*p;
-	int			y;
-	int			x;
+	int	y;
+	int	x;
 
-	if (!game)
-		return ;
-	p = &(game->player);
 	y = 0;
 	while (map[y])
 	{
@@ -78,21 +74,37 @@ void	init_position(t_game *game, char **map)
 
 void	init_player(t_game *g)
 {
-	init_position(g, g->map->line);
-	g->player.key_rot_left = false;
-	g->player.key_rot_right = false;
+	init_position(&g->player, g->map->line);
 	g->player.key_up = false;
 	g->player.key_down = false;
 	g->player.key_left = false;
 	g->player.key_right = false;
+	g->player.key_rot_left = false;
+	g->player.key_rot_right = false;
 	g->player.rot_step = 0.05;
 }
 
-int	key_release(int keycode, t_game *game)
+int	key_press(int keycode, t_player *player)
 {
-	t_player	*player;
+	if (keycode == LEFT_ARROW)
+		player->key_rot_left = true;
+	if (keycode == RIGHT_ARROW)
+		player->key_rot_right = true;
+	if (keycode == W)
+		player->key_up = true;
+	if (keycode == S)
+		player->key_down = true;
+	if (keycode == A)
+		player->key_left = true;
+	if (keycode == D)
+		player->key_right = true;
+	if (keycode == ESC || keycode == X)
+		exit (1);
+	return (0);
+}
 
-	player = &(game->player);
+int	key_release(int keycode, t_player *player)
+{
 	if (keycode == LEFT_ARROW)
 		player->key_rot_left = false;
 	if (keycode == RIGHT_ARROW)
@@ -107,3 +119,4 @@ int	key_release(int keycode, t_game *game)
 		player->key_right = false;
 	return (0);
 }
+

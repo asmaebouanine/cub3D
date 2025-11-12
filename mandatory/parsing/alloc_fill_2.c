@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_fill_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 09:33:55 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:28:44 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 12:00:46 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void color_filler(char *colors, t_config **config, char *ident)
     splitted = custom_split(colors,',', 1);
     if(!splitted[0] || !splitted[1] || !splitted[2])
         return;
-    color = (ft_atoi(splitted[0]) << 16 | ft_atoi(splitted[1]) << 8 | ft_atoi(splitted[2]));
+    color = (ft_atoi(splitted[0]) << 16 
+                | ft_atoi(splitted[1]) << 8 | ft_atoi(splitted[2]));
     if(!ft_strcmp(ident, "F"))
         (*config)->color->f_color = color;
     else if(!ft_strcmp(ident, "C"))
@@ -84,6 +85,23 @@ char *return_texture(char * trimmed)
     return(NULL); 
 }
 
+void texture_filling(char **splitted,char *trimmed, t_config **config)
+{
+    if(!ft_strcmp(splitted[0], "NO"))
+        (*config)->texture[NO] = return_texture(trimmed);
+    else if(!ft_strcmp(splitted[0], "WE"))
+        (*config)->texture[WE] = return_texture(trimmed);
+    else if(!ft_strcmp(splitted[0], "SO"))
+        (*config)->texture[SO] = return_texture(trimmed);
+    else if(!ft_strcmp(splitted[0], "EA"))
+        (*config)->texture[EA] = return_texture(trimmed);
+    else
+    {
+        if(!(trimmed +1))
+            return;
+        color_filler(trimmed + 1, config, splitted[0]);
+    }
+}
 void texture_filler(char *line, t_config **config)
 {
     char **splitted;
@@ -97,25 +115,6 @@ void texture_filler(char *line, t_config **config)
     else if(!ft_strcmp(trimmed,""))
         return;
     splitted = custom_split(trimmed, ' ', 1);
-    if(!splitted)
-        return;
-    if(is_identifier(splitted[0]) == 1)
-    {
-        if(!ft_strcmp(splitted[0], "NO"))
-           (*config)->texture[NO] = return_texture(trimmed);
-        else if(!ft_strcmp(splitted[0], "WE"))
-            (*config)->texture[WE] = return_texture(trimmed);
-        else if(!ft_strcmp(splitted[0], "SO"))
-            (*config)->texture[SO] = return_texture(trimmed);
-        else if(!ft_strcmp(splitted[0], "EA"))
-           (*config)->texture[EA] = return_texture(trimmed);
-        else if(!ft_strcmp(splitted[0], "DO"))
-            (*config)->texture[DO] = return_texture(trimmed);
-        else
-        {
-            if(!(trimmed +1))
-                return;
-            color_filler(trimmed + 1, config, splitted[0]);
-        }
-    }
+    if(splitted && is_identifier(splitted[0]) == 1)
+        texture_filling(splitted,trimmed, config);
 }

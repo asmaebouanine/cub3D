@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:26 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:29:40 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:39:38 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int is_identifier(char *str)
         || !ft_strcmp(str, "WE") 
         || !ft_strcmp(str, "EA") 
         || !ft_strcmp(str,"F") 
-        || !ft_strcmp(str,"C")
-        || !ft_strcmp(str, "DO"))
+        || !ft_strcmp(str,"C"))
             return(1);
     else
         return(0);
@@ -54,19 +53,36 @@ int width(int i)
     }
 }
 
+// t_plines *padding(char *prev_line, char *next, char *line)
+// {
+//    int max;
+//    t_plines *res;
+   
+   
+//    max = max_len(prev_line, next, line);
+//    (void)lengh(max);
+//    res = gcmalloc(sizeof(t_plines),1);
+//    if(!res)
+//         return(NULL);
+//     res->prev = pad_line(max,prev_line);
+//     res->line = pad_line(max, line);
+//     res->next = pad_line(max, next);
+//    return(res);  
+// }
 t_plines *padding(char *prev_line, char *next, char *line)
 {
    int max;
    t_plines *res;
    
    
-   max = max_len(prev_line, next, line);
+   max = max_len(ft_strtrim(prev_line, "\n"),
+                        ft_strtrim(next, "\n") , ft_strtrim(line, "\n"));
    (void)lengh(max);
    res = gcmalloc(sizeof(t_plines),1);
    if(!res)
         return(NULL);
-    res->prev = pad_line(max,prev_line);
-    res->line = pad_line(max, line);
-    res->next = pad_line(max, next);
+    res->prev = pad_line(max,ft_strtrim(prev_line, "\n"));
+    res->line = pad_line(max, ft_strtrim(line, "\n"));
+    res->next = pad_line(max,ft_strtrim(next, "\n"));
    return(res);  
 }

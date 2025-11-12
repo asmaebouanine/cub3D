@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xmp_to_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 04:47:26 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:26:31 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/12 00:21:12 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ t_texture  *lst_new_convas(char *path, void *mlx_ptr)
     texture = gcmalloc(sizeof(t_texture),0);
     if(!path || !texture)
         return(NULL);
-    texture->img = mlx_xpm_file_to_image(mlx_ptr, path, &(texture->width), &(texture->height));
+    texture->img = mlx_xpm_file_to_image(mlx_ptr, path,
+                 &(texture->width), &(texture->height));
     if(!(texture->img))
         return(NULL);
-    texture->addr = mlx_get_data_addr(texture->img, &(texture->bpp), &(texture->line_size),&(texture->endian));
+    texture->addr = mlx_get_data_addr(texture->img, 
+                    &(texture->bpp), &(texture->line_size),&(texture->endian));
     if(!(texture->addr))
         return(NULL);
     return(texture);
