@@ -6,10 +6,9 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:51 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:27:52 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:08:51 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../cub3D.h"
 
@@ -133,4 +132,3 @@ char	*get_next_line(int fd)
 	}
 	return (join);
 }
-

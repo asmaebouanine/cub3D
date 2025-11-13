@@ -6,34 +6,34 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:54 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/02 17:28:04 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:08:23 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../cub3D.h"
 
-int ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!str)
-        return(0);
-    while(str[i])
-    {
-        i++;
-    }
-    return(i); 
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
 }
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    int i = 0;
+	int	i;
 
-    while (s1[i] && s2[i] && s1[i] == s2[i])
-        i++;
-    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 int	ft_isdigit(int c)
@@ -85,4 +85,3 @@ int	ft_atoi(const char *str)
 	}
 	return (sign * result);
 }
-
