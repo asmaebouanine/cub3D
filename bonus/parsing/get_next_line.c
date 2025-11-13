@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:51 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:12 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:53:45 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../cub3D_bonus.h"
 
@@ -133,4 +132,3 @@ char	*get_next_line(int fd)
 	}
 	return (join);
 }
-

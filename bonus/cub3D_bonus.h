@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:33:29 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,15 +309,16 @@ t_door			*doors_coordin(int x, int y);
 t_door			*door_struct(void);
 t_door			**t_door_to_double_char(void);
 t_weapon		*xmp_t_img_wpn(char **weapons, void *mlx_ptr);
-void 			color_filler(char *colors, t_config **config, char *ident);
-char 			**anim_alloc(void);
-void 			anims(char **anim);
-int 			parse_inside(t_plines  *res, int *player, int flag);
-int 			parse_inside_2(t_plines  *res, int *player, int flag, int *i);
-int 			parssing_core(int fd, t_identifiers *identifiers);
-int 			after_map_parse(char *line);
-int 			config_parsser(char *line, t_identifiers *identifiers);
-int 			config_parsser_2(char **splitted,char *trimmed, t_identifiers *identifiers);
-int 			is_texture(char *str, t_identifiers *identifiers);
+void			color_filler(char *colors, t_config **config, char *ident);
+char			**anim_alloc(void);
+void			anims(char **anim);
+int				parse_inside(t_plines *res, int *player, int flag);
+int				parse_inside_2(t_plines *res, int *player, int flag, int *i);
+int				parssing_core(int fd, t_identifiers *identifiers);
+int				after_map_parse(char *line);
+int				config_parsser(char *line, t_identifiers *identifiers);
+int				config_parsser_2(char **splitted,
+					char *trimmed, t_identifiers *identifiers);
+int				is_texture(char *str, t_identifiers *identifiers);
 
 #endif

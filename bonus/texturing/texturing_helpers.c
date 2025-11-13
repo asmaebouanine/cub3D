@@ -6,32 +6,30 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:20:22 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/11 23:55:26 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:13:10 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../cub3D_bonus.h"
 
-unsigned int apply_shading(unsigned int color)
+unsigned int	apply_shading(unsigned int color)
 {
-    double darkness;
-    int r;
-    int g;
-    int b;
-    
-    darkness = 1.0 / (1.0 + save_distance(-1) * 0.1); 
-    r = (int)(((color >> 16) & 0xFF) * darkness);
-    g = (int)(((color >> 8) & 0xFF) * darkness);
-    b = (int)((color & 0xFF) * darkness);
-    
-    return (r << 16) | (g << 8) | b;
-}
-unsigned int get_texture_color(t_texture *tex, int x, int y)
-{
-    char *dst;
-    
-    dst = tex->addr + (y * tex->line_size + x * (tex->bpp / 8));
+	double	darkness;
+	int		r;
+	int		g;
+	int		b;
 
-    return (*(unsigned int*)dst);
+	darkness = 1.0 / (1.0 + save_distance(-1) * 0.1);
+	r = (int)(((color >> 16) & 0xFF) * darkness);
+	g = (int)(((color >> 8) & 0xFF) * darkness);
+	b = (int)((color & 0xFF) * darkness);
+	return ((r << 16) | (g << 8) | b);
+}
+
+unsigned int	get_texture_color(t_texture *tex, int x, int y)
+{
+	char	*dst;
+
+	dst = tex->addr + (y * tex->line_size + x * (tex->bpp / 8));
+	return (*(unsigned int *)dst);
 }

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   custom_strjoin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:43 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:01 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:45:10 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../cub3D_bonus.h"
 

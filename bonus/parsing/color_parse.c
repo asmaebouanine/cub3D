@@ -6,15 +6,14 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:22 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 13:35:45 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:43:36 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../cub3D_bonus.h"
 
 int	parse_color(char *trimmed)
-{ 
+{
 	return (valid_color(trimmed));
 }
 
@@ -35,7 +34,7 @@ int	valid_color(char *colors)
 		return (0);
 	while (splitted[i])
 	{
-		if(!color_validation(splitted[i]))
+		if (!color_validation(splitted[i]))
 			return (0);
 		i++;
 	}
@@ -54,49 +53,49 @@ int	comma_count(char *color)
 	while (color[i])
 	{
 		if (color[i] == ',')
-		count++;
+			count++;
 		i++;
 	}
 	if (count != 2)
-        return(0);
-    else
-        return(1);
+		return (0);
+	else
+		return (1);
 }
 
-int color_validation(char *color)
+int	color_validation(char *color)
 {
-    char *trimmed;
-    int i;
-    int numb;
-    
-    trimmed = ft_strtrim(color, " ");
-    i = 0;
-    if(!trimmed)
-        return(0);
-    while(trimmed[i])
-    {
-        if(!ft_isdigit(trimmed[i]))
-            return(0);
-        i++;
-    }
-    numb = ft_atoi(trimmed);
-    if(numb <0 || numb >255)
-        return(0);
-    else
-        return(1);
+	char	*trimmed;
+	int		i;
+	int		numb;
+
+	trimmed = ft_strtrim(color, " ");
+	i = 0;
+	if (!trimmed)
+		return (0);
+	while (trimmed[i])
+	{
+		if (!ft_isdigit(trimmed[i]))
+			return (0);
+		i++;
+	}
+	numb = ft_atoi(trimmed);
+	if (numb < 0 || numb > 255)
+		return (0);
+	else
+		return (1);
 }
 
-int is_color(char *str, t_identifiers *identifiers)
+int	is_color(char *str, t_identifiers *identifiers)
 {
-   if(!ft_strcmp(str,"F") || !ft_strcmp(str,"C"))
-   {
-        if(!ft_strcmp(str,"F"))
-            identifiers->f++;
-        else if(!ft_strcmp(str,"C"))
-            identifiers->c++;
-        if(identifiers->f > 1 || identifiers->c > 1)
-            return(0);
-        return(1);
-   }
-    return(0);
+	if (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"))
+	{
+		if (!ft_strcmp(str, "F"))
+			identifiers->f++;
+		else if (!ft_strcmp(str, "C"))
+			identifiers->c++;
+		if (identifiers->f > 1 || identifiers->c > 1)
+			return (0);
+		return (1);
+	}
+	return (0);
 }
