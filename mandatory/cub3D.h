@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 16:50:26 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 08:47:08 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_ray
 	double	delta_y;
 	double	dist_x;
 	double	dist_y;
-	double	wallX;
+	double	wall_x;
 	int		step_x;
 	int		step_y;
 	int		side;
@@ -212,7 +212,8 @@ char			*ft_strdup_(const char *s1);
 char			*pad_line(int max, char *line);
 char			*custom_strjoin(const char *s1, const char *s2, int pid);
 char			*ft_strndup(const char *s1, size_t n);
-char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			*ft_strnstr(const char *haystack, const char *needle,
+					size_t len);
 int				is_valid_char(char c, char *line, int i);
 int				count_words(const char *s, char c);
 int				ft_strlen(const char *str);

@@ -6,7 +6,7 @@
 #    By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/14 14:59:01 by asbouani          #+#    #+#              #
-#    Updated: 2025/11/12 21:06:45 by asbouani         ###   ########.fr        #
+#    Updated: 2025/11/13 09:04:03 by asbouani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MLX = -Lmlx -lmlx -lX11 -lXext -lm
 
 HEADER = mandatory/cub3D.h
 
-HEADER_B = mandatory/cub3D_mandatory.h
+HEADER_B = bonus/cub3D_bonus.h
 
 SRCS = mandatory/raycasting/cub3D.c mandatory/raycasting/move_player.c mandatory/raycasting/cast_ray.c mandatory/raycasting/ray_rander.c mandatory/raycasting/init_player.c  \
 		mandatory/parsing/get_next_line.c mandatory/parsing/get_next_line_utils.c mandatory/parsing/cleaning.c mandatory/parsing/map_parssing.c mandatory/parsing/custom_func.c mandatory/parsing/custom_split.c mandatory/parsing/parssing_helpers.c \
@@ -53,11 +53,12 @@ bonus: $(OBJCS_B)
 	$(CC) $(CFLAGS) $(OBJCS_B) $(MLX) -o $(NAME)
 
 clean: 
-	rm -rf $(OBJCS) $(OBJCS_B)
+	rm -f $(OBJCS) $(OBJCS_B)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
 .PHONY: clean
+

@@ -6,13 +6,12 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 21:05:52 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 08:47:08 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
-
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -26,7 +25,6 @@
 # define BUFFER_SIZE 1
 # define TILE_SIZE 20
 # define VIEW_SIZE 10
-
 # define SIZE 64
 # define WIDTH 1280
 # define HEIGHT 720
@@ -37,7 +35,6 @@
 # define A 97
 # define S 115
 # define D 100
-# define X 120
 # define ESC 65307
 
 # define NO 0
@@ -76,7 +73,7 @@ typedef struct s_plines
 	char	*prev;
 	char	*line;
 	char	*next;
-}				t_plines;
+}	t_plines;
 
 typedef struct s_identifiers
 {
@@ -127,7 +124,7 @@ typedef struct s_ray
 	double	delta_y;
 	double	dist_x;
 	double	dist_y;
-	double	wallX;
+	double	wall_x;
 	int		step_x;
 	int		step_y;
 	int		side;
@@ -163,19 +160,18 @@ typedef struct s_convas
 
 typedef struct s_w_texture
 {
-    void *img;
-    int   width;
-    int   height;
+	void	*img;
+	int		width;
+	int		height;
 	char	*addr;
 	int		bpp;
 	int		line_size;
 	int		endian;
-} t_w_texture;
-
+}	t_w_texture;
 
 typedef struct s_weapon
 {
-	t_w_texture weapons[25];
+	t_w_texture	weapons[25];
 }	t_weapon;
 
 typedef struct s_game
@@ -189,125 +185,121 @@ typedef struct s_game
 	int			endian;
 	int			size_line;
 	int			bits_per_pixel;
+	int			curr_weap;
+	int			attacking;
 	t_player	player;
 	t_config	*config;
 	t_map		*map;
 	t_convas	convas;
 	t_weapon	weapons;
-	int  curr_weap;
-	int       attacking;
 	t_door		**doors;
 }	t_game;
 
-typedef struct s_tex_coor
+typedef struct s_tex_coord
 {
-	int tex_x;
-    double step;
-    double tex_pos;
-    int tex_y;
-} t_tex_cood;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+	int		tex_y;
+}	t_tex_coord;
 
-double	cast_ray(t_game *game, t_player *p, t_ray *ray);
-void	put_pixel(int x, int y, int color, t_game *game);
-void	render_column(t_game *game, int x);
-void	init_player(t_game *g);
-void	move_player(t_game *game, char **map);
-void	rotate_player(t_player *p, double rot_speed);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-int     mouse_control(int x, int y, t_game *game);
-void    minimap(t_game *game);
-int		close_window(void *param);
+double			cast_ray(t_game *game, t_player *p, t_ray *ray);
+void			put_pixel(int x, int y, int color, t_game *game);
+void			render_column(t_game *game, int x);
+void			init_player(t_game *g);
+void			move_player(t_game *game, char **map);
+void			rotate_player(t_player *p, double rot_speed);
+void			minimap(t_game *game);
+int				key_press(int keycode, t_game *game);
+int				key_release(int keycode, t_game *game);
+int				mouse_control(int x, int y, t_game *game);
+int				close_window(void *param);
 
-void	draw_player(t_game *game);
-void	door_handling(t_game *game);
-void	check_and_move(t_game *game, char **map, double new_x, double new_y);
+void			draw_player(t_game *game);
+void			door_handling(t_game *game);
+void			check_and_move(t_game *game, char **map, double new_x,
+					double new_y);
 
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	*gcmalloc(size_t size, int status_flag);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	fill_config_struct(char *file, t_config **config);
-void	texture_filler(char *line, t_config **config);
-void	texture_filler(char *line, t_config **config);
-void	map_filler(int fd, char *first_line, t_config **config);
-void	draw_wall(int x, t_line *line, t_game *game, t_ray *ray);
-void	draw_floor_and_ceiling(t_game *game, int x);
-void	calc_wall(t_game *game, t_ray *ray, double dist, t_line *line);
-void	wallx_call(t_game *game, t_ray *ray, double dist);
-void	color_filler(char *colors, t_config **config, char *ident);
-char	*return_texture(char *trimmed);
-char	*filling_pad(char *line);
-char	*get_next_line(int fd);
-char	*ft_strdup(char *s1, char *temp);
-char	*until_newline(char *rest);
-char	*rest_of_line(char *temp);
-char	*ft_strtrim(const char *s1, const char *set);
-char	*pad_line(int max, char *line);
-char	**custom_split(const char *s, char c, int pid);
-char	*ft_strdup_(const char *s1);
-char	*pad_line(int max, char *line);
-char	*custom_strjoin(const char *s1, const char *s2, int pid);
-char	*ft_strndup(const char *s1, size_t n);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-int		is_valid_char(char c, char *line, int i);
-int		ft_strlen(const char *str);
-int		count_words(const char *s, char c);
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-int		map_parssing(int fd, char *first_line);
-int		is_it_map(char *line);
-int		ft_strcmp(const char *s1, const char *s2);
-int		space_checking(t_plines *res, int i);
-int		lengh(int len);
-int		width(int i);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		is_texture(char *str, t_identifiers *identifiers);
-int		parse_texture(char **splitted, char *trimmed);
-int		valid_texture(char *str);
-int		parse_sec_text(char *str);
-int		ea_tex_len(int len);
-int		no_tex_len(int len);
-int		so_tex_len(int len);  
-int		we_tex_len(int len);
-int		is_color(char *str, t_identifiers *identifiers);
-int		color_validation(char *color);
-int		comma_count(char *color);
-int		valid_color(char *colors);
-int		parse_color(char *trimmed);
-int		config_parsser(char *line, t_identifiers *identifiers);
-int		after_map_parse(char *line);
-int		parssing_core(int fd, t_identifiers *identifiers);
-int		parssing(int fd);
-int		space_checking(t_plines *res, int i);
-int		max_len(char *prev_line, char *next, char *line);
-int		valid_map_chars(char *line);
-int		is_valid_char(char c, char *line, int i);
-int		space_valid_adj(char c);
-int		map_parssing(int fd, char *first_line);
-int		lineparssing(char *line, char *next, int first, int *player);
-int		parse_inside(t_plines *res, int *player, int flag);
-int		parse_frame(t_plines *res, int *player);
-int		door_checking(t_plines *res, int i);
-int		do_tex_len(int len);
-int		find_cooresp_dr(t_game *game, int map_y, int map_x);
-int		is_identifier(char *str);
-unsigned int get_texture_color(t_texture *tex, int x, int y);
-unsigned int apply_shading(unsigned int color);
-t_map	*alloc_map(void);
-size_t	ft_strlen2(const char *str, char *temp);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-t_player save_coordin(int x, int y, char direc);
-t_texture *lst_new_convas(char *path, void *mlx_ptr);
-t_convas *xmp_to_image(char **textures, void *mlx_ptr);
-t_plines *padding(char *prev_line, char *next, char *line);
-t_config *parsser(int argc, char **argv);
-t_config *config_struct(void);
-t_door	*doors_coordin(int x, int y);
-t_door	*door_struct(void);
-t_door	**t_door_to_double_char(void);
-t_weapon *xmp_t_img_wpn(char **weapons, void *mlx_ptr);
-char	*custom_strdup(const char	*s1, int pid);
-void 	draw_weapon(t_game *game);
-int 	save_distance(double dist);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+void			*gcmalloc(size_t size, int status_flag);
+void			fill_config_struct(char *file, t_config **config);
+void			texture_filler(char *line, t_config **config);
+void			map_filler(int fd, char *first_line, t_config **config);
+void			draw_wall(int x, t_line *line, t_game *game, t_ray *ray);
+void			draw_floor_and_ceiling(t_game *game, int x);
+void			calc_wall(t_game *game, t_ray *ray, double dist, t_line *line);
+void			wallx_call(t_game *game, t_ray *ray, double dist);
+void			color_filler(char *colors, t_config **config, char *ident);
+char			*return_texture(char *trimmed);
+void			draw_weapon(t_game *game);
+char			*filling_pad(char *line);
+char			*custom_strdup(const char *s1, int pid);
+char			*get_next_line(int fd);
+char			*ft_strdup(char *s1, char *temp);
+char			*until_newline(char *rest);
+char			*rest_of_line(char *temp);
+char			*ft_strtrim(const char *s1, const char *set);
+char			*pad_line(int max, char *line);
+char			**custom_split(const char *s, char c, int pid);
+char			*ft_strdup_(const char *s1);
+char			*custom_strjoin(const char *s1, const char *s2, int pid);
+char			*ft_strndup(const char *s1, size_t n);
+char			*ft_strnstr(const char *haystack, const char *needle,
+					size_t len);
+int				save_distance(double dist);
+int				is_valid_char(char c, char *line, int i);
+int				ft_strlen(const char *str);
+int				count_words(const char *s, char c);
+int				ft_atoi(const char *str);
+int				ft_isdigit(int c);
+int				map_parssing(int fd, char *first_line);
+int				is_it_map(char *line);
+int				ft_strcmp(const char *s1, const char *s2);
+int				space_checking(t_plines *res, int i);
+int				lengh(int len);
+int				width(int i);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				is_texture(char *str, t_identifiers *identifiers);
+int				parse_texture(char **splitted, char *trimmed);
+int				valid_texture(char *str);
+int				parse_sec_text(char *str);
+int				ea_tex_len(int len);
+int				no_tex_len(int len);
+int				so_tex_len(int len);
+int				we_tex_len(int len);
+int				is_color(char *str, t_identifiers *identifiers);
+int				color_validation(char *color);
+int				comma_count(char *color);
+int				valid_color(char *colors);
+int				parse_color(char *trimmed);
+int				config_parsser(char *line, t_identifiers *identifiers);
+int				after_map_parse(char *line);
+int				parssing_core(int fd, t_identifiers *identifiers);
+int				parssing(int fd);
+int				max_len(char *prev_line, char *next, char *line);
+int				valid_map_chars(char *line);
+int				space_valid_adj(char c);
+int				lineparssing(char *line, char *next, int first, int *player);
+int				parse_inside(t_plines *res, int *player, int flag);
+int				parse_frame(t_plines *res, int *player);
+int				door_checking(t_plines *res, int i);
+int				do_tex_len(int len);
+int				find_cooresp_dr(t_game *game, int map_y, int map_x);
+int				is_identifier(char *str);
+unsigned int	get_texture_color(t_texture *tex, int x, int y);
+unsigned int	apply_shading(unsigned int color);
+t_map			*alloc_map(void);
+size_t			ft_strlen2(const char *str, char *temp);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+t_player		save_coordin(int x, int y, char direc);
+t_texture		*lst_new_convas(char *path, void *mlx_ptr);
+t_convas		*xmp_to_image(char **textures, void *mlx_ptr);
+t_plines		*padding(char *prev_line, char *next, char *line);
+t_config		*parsser(int argc, char **argv);
+t_config		*config_struct(void);
+t_door			*doors_coordin(int x, int y);
+t_door			*door_struct(void);
+t_door			**t_door_to_double_char(void);
+t_weapon		*xmp_t_img_wpn(char **weapons, void *mlx_ptr);
 
 #endif

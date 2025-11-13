@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturing_tiles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:12:34 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/12 13:03:50 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 08:47:08 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void wallx_call(t_game *game, t_ray *ray, double dist)
     else 
         hit_world = player_x_unit + ray->ray_dx * dist;
     
-    ray->wallX = hit_world - floor(hit_world);
+    ray->wall_x = hit_world - floor(hit_world);
     if (ray->tex_id == WE || ray->tex_id == SO) 
-        ray->wallX = 1.0 - ray->wallX;
+        ray->wall_x = 1.0 - ray->wall_x;
 }
 void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
 {
@@ -80,7 +80,7 @@ void draw_wall(int x, t_line *line, t_game *game, t_ray *ray)
     unsigned int color ;
     
     tex = &game->convas.textures[ray->tex_id];
-    tex_coor.tex_x = (int)(ray->wallX * tex->width);
+    tex_coor.tex_x = (int)(ray->wall_x * tex->width);
     tex_coor.step = 1.0 * tex->height / line->line_height;
     tex_coor.tex_pos = (line->draw_start 
                             - game->win_height / 2 
