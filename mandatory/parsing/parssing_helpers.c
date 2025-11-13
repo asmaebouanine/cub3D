@@ -6,12 +6,36 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:26 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/12 11:39:38 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../cub3D.h"
+
+int is_texture(char *str, t_identifiers *identifiers)
+{
+    if(!ft_strcmp(str,"NO") 
+        || !ft_strcmp(str, "SO") 
+        || !ft_strcmp(str, "WE") 
+        || !ft_strcmp(str, "EA"))
+    {
+        if(!ft_strcmp(str, "NO"))
+            identifiers->no++;
+        else if(!ft_strcmp(str, "SO"))
+            identifiers->so++;
+        else if(!ft_strcmp(str, "WE"))
+            identifiers->we++;
+        else if(!ft_strcmp(str, "EA"))
+            identifiers->ea++;
+        if(identifiers->no > 1 || identifiers->so > 1
+                 ||  identifiers->we > 1 || identifiers->ea > 1)
+            return(0);
+        return(1);
+    }
+    else
+        return(0);
+}
 
 int is_it_map(char *line)
 {
@@ -53,22 +77,6 @@ int width(int i)
     }
 }
 
-// t_plines *padding(char *prev_line, char *next, char *line)
-// {
-//    int max;
-//    t_plines *res;
-   
-   
-//    max = max_len(prev_line, next, line);
-//    (void)lengh(max);
-//    res = gcmalloc(sizeof(t_plines),1);
-//    if(!res)
-//         return(NULL);
-//     res->prev = pad_line(max,prev_line);
-//     res->line = pad_line(max, line);
-//     res->next = pad_line(max, next);
-//    return(res);  
-// }
 t_plines *padding(char *prev_line, char *next, char *line)
 {
    int max;

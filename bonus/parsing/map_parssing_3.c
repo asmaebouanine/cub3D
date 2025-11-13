@@ -6,11 +6,22 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:02:37 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/11 22:30:40 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
+
+int do_tex_len(int len)
+{
+    static int doo;
+    
+    if(len >0)
+    {
+        doo = len;
+    }
+    return(doo);
+}
 
 int vertical_checking(t_plines *res, int i)
 {
@@ -28,6 +39,7 @@ int vertical_checking(t_plines *res, int i)
     else
         return(0);
 }
+
 int horizontal_checking(t_plines *res, int i)
 {
     bool top;
@@ -41,6 +53,7 @@ int horizontal_checking(t_plines *res, int i)
         return(0);
     
 }
+
 int door_checking(t_plines *res, int i)
 {
     if(!res)
@@ -52,6 +65,7 @@ int door_checking(t_plines *res, int i)
     else
         return(1);
 }
+
 t_door *door_struct(void)
 {
     t_door *door_coor;

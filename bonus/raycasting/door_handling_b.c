@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_handling_b.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:31:44 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 18:51:41 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:07:56 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,25 @@ int	find_cooresp_dr(t_game *game, int map_y, int map_x)
 	}
 	return (i);
 }
+
+void	coord_cal(t_game *game, t_coord *coor)
+{
+	(*coor).player_map_x = (double)game->player.x / (double)SIZE;
+	(*coor).player_map_y = (double)game->player.y / (double)SIZE;
+	(*coor).check_x = (*coor).player_map_x + game->player.dx * 0.5;
+	(*coor).check_y = (*coor).player_map_y + game->player.dy * 0.5;
+}
+
 void	door_handling(t_game *game)
 {
 	int		i;
 	int		map_y;
 	int		map_x;
-	double	check_x;
-	double	check_y;
-	double	player_map_x;
-	double	player_map_y;
+	t_coord	coor;
 
-	player_map_x = (double)game->player.x / (double)SIZE;
-	player_map_y = (double)game->player.y / (double)SIZE;
-	check_x = player_map_x + game->player.dx * 0.5;
-	check_y = player_map_y + game->player.dy * 0.5;
-	map_x = (int)check_x;
-	map_y = (int)check_y;
+	coord_cal(game, &coor);
+	map_x = (int)coor.check_x;
+	map_y = (int)coor.check_y;
 	if (map_y < 0 || map_y >= game->map->height
 		|| map_x < 0 || map_x >= game->map->width)
 	{

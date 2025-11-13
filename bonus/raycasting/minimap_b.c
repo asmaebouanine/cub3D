@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:49:13 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 20:53:28 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:08:59 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../cub3D_bonus.h"
+#include "../cub3D_bonus.h"
 
 void	draw_one_tile(t_game *game, int screen_x, int screen_y, int color)
 {

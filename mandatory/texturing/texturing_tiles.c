@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturing_tiles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:12:34 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 08:47:08 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void wallx_call(t_game *game, t_ray *ray, double dist)
     if (ray->tex_id == WE || ray->tex_id == SO) 
         ray->wall_x = 1.0 - ray->wall_x;
 }
+
 void calc_wall(t_game *game, t_ray *ray, double dist, t_line *line)
 {
     line->line_height = (int)(game->win_height / dist);
@@ -72,6 +73,7 @@ void draw_floor_and_ceiling(t_game *game, int x)
         y++;
     }
 }
+
 void draw_wall(int x, t_line *line, t_game *game, t_ray *ray)
 {
     t_texture *tex;

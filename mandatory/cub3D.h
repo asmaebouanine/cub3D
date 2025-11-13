@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/13 08:47:08 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,5 +251,13 @@ int				parse_frame(t_plines *res, int *player);
 int				parse_inside(t_plines *res, int *player, int flag);
 int				is_identifier(char *str);
 int				save_distance(double dist);
+void 			color_filler(char *colors, t_config **config, char *ident);
+int 			parse_inside(t_plines  *res, int *player, int flag);
+int 			parse_inside_2(t_plines  *res, int *player, int flag, int *i);
+int 			parssing_core(int fd, t_identifiers *identifiers);
+int 			after_map_parse(char *line);
+int 			config_parsser(char *line, t_identifiers *identifiers);
+int 			config_parsser_2(char **splitted,char *trimmed, t_identifiers *identifiers);
+int 			is_texture(char *str, t_identifiers *identifiers);
 
 #endif

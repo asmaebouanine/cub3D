@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_coord.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 00:32:24 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:05 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int lst_size_dr(t_door *door)
     }
     return(i);
 }
+
 void	ft_lstadd_back_dr(t_door **lst, t_door *new)
 {
 	t_door	*temp;
@@ -58,6 +59,7 @@ void	ft_lstadd_back_dr(t_door **lst, t_door *new)
 	}
 	(temp)->next = new;
 }
+
 t_door *doors_coordin(int x, int y)
 {
     static t_door *door_coor;

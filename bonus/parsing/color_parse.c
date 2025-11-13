@@ -3,63 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   color_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:22 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:30:50 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:35:45 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../cub3D_bonus.h"
 
-int parse_color(char *trimmed)
-{
-    
-    return(valid_color(trimmed));
-    
+int	parse_color(char *trimmed)
+{ 
+	return (valid_color(trimmed));
 }
 
-int valid_color(char *colors)
+int	valid_color(char *colors)
 {
-    char **splitted;
-    int i;
-    
-    i = 0;
-    if(!colors)
-        return(0);
-    if(!comma_count(colors))
-        return(0);
-    if(count_words(colors,',') != 3)
-        return(0);
-    splitted = custom_split(colors,',', 1);
-    if(!splitted)
-        return(0);
-    while(splitted[i])
-    {
-        if(!color_validation(splitted[i]))
-            return(0);
-        i++;
-    }
-    return(1); 
-} 
-  
-int comma_count(char *color)
-{
-    int i;
-    int count;
+	char	**splitted;
+	int		i;
 
-    if(!color)
-        return(0);
-    i = 0;
-    count = 0;
-    while(color[i])
-    {
-        if(color[i] == ',')
-            count++;
-        i++;
-    }
-    if (count != 2)
+	i = 0;
+	if (!colors)
+		return (0);
+	if (!comma_count(colors))
+		return (0);
+	if (count_words(colors, ',') != 3)
+		return (0);
+	splitted = custom_split(colors, ',', 1);
+	if (!splitted)
+		return (0);
+	while (splitted[i])
+	{
+		if(!color_validation(splitted[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	comma_count(char *color)
+{
+	int	i;
+	int	count;
+
+	if (!color)
+		return (0);
+	i = 0;
+	count = 0;
+	while (color[i])
+	{
+		if (color[i] == ',')
+		count++;
+		i++;
+	}
+	if (count != 2)
         return(0);
     else
         return(1);

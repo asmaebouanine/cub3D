@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing_lengh.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:31 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/08 17:31:33 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,4 @@ int ea_tex_len(int len)
         ea = len;
     }
     return(ea);
-}
-int do_tex_len(int len)
-{
-    static int doo;
-    
-    if(len >0)
-    {
-        doo = len;
-    }
-    return(doo);
 }

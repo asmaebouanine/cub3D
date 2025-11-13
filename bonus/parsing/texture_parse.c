@@ -6,39 +6,11 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:45 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/11 22:37:30 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:48:58 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D_bonus.h"
-
-int is_texture(char *str, t_identifiers *identifiers)
-{
-    if(!ft_strcmp(str,"NO") 
-        || !ft_strcmp(str, "SO") 
-        || !ft_strcmp(str, "WE") 
-        || !ft_strcmp(str, "EA") 
-        || !ft_strcmp(str, "DO"))
-    {
-        if(!ft_strcmp(str, "NO"))
-            identifiers->no++;
-        else if(!ft_strcmp(str, "SO"))
-            identifiers->so++;
-        else if(!ft_strcmp(str, "WE"))
-            identifiers->we++;
-        else if(!ft_strcmp(str, "EA"))
-            identifiers->ea++;
-        else if(!ft_strcmp(str, "DO"))
-            identifiers->doo++;
-        if(identifiers->no > 1 
-            || identifiers->so > 1 ||  identifiers->we > 1 
-            || identifiers->ea > 1 || identifiers->doo > 1)
-            return(0);
-        return(1);
-    }
-    else
-        return(0);
-}
 
 int parse_sec_text(char *str)
 {
