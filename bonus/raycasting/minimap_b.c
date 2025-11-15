@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:49:13 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/13 12:08:59 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:32:12 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	draw_tile(t_game *game, int row, int col, double *offset)
 	p_row = (int)(game->player.y / SIZE);
 	p_col = (int)(game->player.x / SIZE);
 	if (game->map->line[row][col] == '1')
-		color = 0xFF0000;
+		color = 0x620035;
 	else if (game->map->line[row][col] == 'D')
-		color = 0x0000FF;
+		color = 0xFF69B4;
 	else
 		color = 0x000000;
 	draw_one_tile(

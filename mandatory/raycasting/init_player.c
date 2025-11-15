@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:05:53 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 15:35:57 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:05:26 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_west(t_player *p)
 	p->dx = -1;
 	p->dy = 0;
 	p->plane_x = 0;
-	p->plane_y = -0.6;
+	p->plane_y = -0.66;
 }
 
 void	init_direction(t_player *p, char dir)

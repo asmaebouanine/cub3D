@@ -6,7 +6,7 @@
 /*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:45:17 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 20:39:41 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:03:16 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_player_icon(t_game *game, int px, int py)
 		while (x <= radius)
 		{
 			if (x * x + y * y <= radius * radius)
-				put_pixel(px + x, py + y, 0x00FF00, game);
+				put_pixel(px + x, py + y, 0xFF99CC, game);
 			x++;
 		}
 		y++;
@@ -57,7 +57,7 @@ void	draw_player_icon(t_game *game, int px, int py)
 	while (i < 20)
 	{
 		put_pixel(px + game->player.dx * i,
-			py + game->player.dy * i, 0x00FF00, game);
+			py + game->player.dy * i, 0xFF99CC, game);
 		i++;
 	}
 }
