@@ -39,6 +39,9 @@ void	weapon_pixels( t_w_texture *weapon_tex,
 	}
 }
 
+
+
+
 void	attack_handling(t_game *game)
 {
 	int			x;
@@ -52,7 +55,7 @@ void	attack_handling(t_game *game)
 	y = game->win_height - weapon_tex->height;
 	weapon_pixels(weapon_tex, x, y, game);
 	game->curr_weap++;
-	if (game->curr_weap >= 24)
+	if (game->curr_weap >= 7)
 	{
 		game->curr_weap = 0;
 		game->attacking = 0;
@@ -109,7 +112,7 @@ t_weapon	*xmp_t_img_wpn(char **weapons, void *mlx_ptr)
 	weapon = gcmalloc(sizeof(t_weapon), 0);
 	if (!weapons || !weapon)
 		return (NULL);
-	while (i < 24)
+	while (i < 7)
 	{
 		tmp_tex = lst_new_weapon(weapons[i], mlx_ptr);
 		if (tmp_tex == NULL)

@@ -171,7 +171,7 @@ typedef struct s_w_texture
 
 typedef struct s_weapon
 {
-	t_w_texture	weapons[25];
+	t_w_texture	weapons[8];
 }	t_weapon;
 
 typedef struct s_game
