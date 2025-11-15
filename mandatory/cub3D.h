@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/13 20:11:45 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:44:46 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ typedef struct s_trash
 	void			*point;
 	struct s_trash	*next;
 }	t_trash;
+
+typedef struct s_fds
+{
+	int			fd;
+	struct s_fds *next;
+}	t_fds;
 
 typedef struct s_plines
 {
@@ -260,5 +266,6 @@ int				config_parsser(char *line, t_identifiers *identifiers);
 int				config_parsser_2(char **splitted,
 					char *trimmed, t_identifiers *identifiers);
 int				is_texture(char *str, t_identifiers *identifiers);
+void 			gc_fds(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:40 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 20:01:50 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:35:43 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_config	*parsser_core(int argc, char **argv, t_config **config)
 		fd = open(argv[1], O_RDONLY);
 		if (fd >= 0)
 		{
+			gc_fds(fd);
 			if (!parssing(fd))
 			{
 				printf("enter a valid map/config file\n");

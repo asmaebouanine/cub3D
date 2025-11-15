@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:45 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 19:58:28 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:40:46 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ int	valid_texture_2(char *path)
 	if (fd < 0)
 		return (0);
 	else
+	{
+		gc_fds(fd);
 		return (len);
+	}
 }
 
 int	valid_texture(char *str)

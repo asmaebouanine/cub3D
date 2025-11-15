@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:04 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 13:08:56 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/15 23:33:25 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	fill_config_struct(char *file, t_config **config)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return ;
+	gc_fds(fd);
 	line = get_next_line(fd);
 	if (!line)
 		return ;

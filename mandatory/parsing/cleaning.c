@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:27:18 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 19:33:29 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/15 23:11:28 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,33 @@ void	*gcmalloc(size_t size, int status_flag)
 	new->next = trash;
 	trash = new;
 	return (ptr);
+}
+
+static void	closegarbage(t_fds **trash, int status_flag)
+{
+	t_fds	*tmp;
+	
+	while (*trash)
+	{
+		tmp = *trash;
+		*trash = (*trash)->next;
+		close(tmp->fd);
+		free(tmp);
+	}
+	exit(status_flag);
+}
+
+void gc_fds(int fd)
+{
+	static t_fds	*trash;
+	t_fds			*new;
+
+	new = malloc(sizeof(t_fds));
+	if(fd < 0)
+		closegarbage(&trash, 0);
+	if (!new)
+		closegarbage(&trash, 1);
+	new->fd = fd;
+	new->next = trash;
+	trash = new;
 }

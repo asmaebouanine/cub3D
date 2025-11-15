@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/12 18:01:00 by asbouani         ###   ########.fr       */
+/*   Updated: 2025/11/15 23:35:30 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	game_loop(t_game *game)
 
 int	close_window(void *param)
 {
+	gc_fds(-1);
+    gcmalloc(0, 0);
 	(void)param;
 	exit (1);
 }
@@ -73,14 +75,22 @@ int	main(int argc, char **argv)
 
 	config = parsser(argc, argv);
 	if (!config)
-		return (0);
+	{
+		gc_fds(-1);
+		gcmalloc(0,0);
+		return (1);
+	}
 	game.config = config;
 	game.map = config->map;
 	game.player = *(config->player);
 	init_game(&game);
 	convas = xmp_to_image(game.config->texture, game.mlx);
 	if (!convas)
+	{
+		gc_fds(-1);
+		gcmalloc(0,0);
 		return (1);
+	}
 	game.convas = *convas;
 	init_player(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
@@ -88,5 +98,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 17, 0, close_window, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
+	gc_fds(-1);
+	gcmalloc(0,0);
 	return (0);
 }
