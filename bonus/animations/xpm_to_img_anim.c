@@ -39,9 +39,6 @@ void	weapon_pixels( t_w_texture *weapon_tex,
 	}
 }
 
-
-
-
 void	attack_handling(t_game *game)
 {
 	int			x;
