@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:46:36 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 13:06:02 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/16 01:31:04 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	anims(char **anim)
 	anim[5] = custom_strdup("./weapons/weapon_5.xpm", 0);
 	anim[6] = custom_strdup("./weapons/weapon_6.xpm", 0);
 	anim[7] = custom_strdup("./weapons/weapon_7.xpm", 0);
-	
 }
 
 char	**anim_alloc(void)

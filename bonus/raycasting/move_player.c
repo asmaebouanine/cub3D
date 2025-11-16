@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/15 23:29:07 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/16 01:33:57 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	close_window(void *param)
 {
 	gc_fds(-1);
-    gcmalloc(0, 0);
+	gcmalloc(0, 0);
 	(void)param;
 	exit (1);
 }

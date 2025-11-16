@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/15 22:44:18 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/16 01:32:57 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ int	main_entering(t_game *game)
 	weapons = xmp_t_img_wpn(game->config->anim, game->mlx);
 	drs_states = t_door_to_double_char();
 	if (!(convas || !drs_states) || !weapons)
-	{	
-		gc_fds(-1);
-		gcmalloc(0,0);
-		return (1);
-	}
+		gcmalloc(0, 0);
 	game->convas = *convas;
 	game->doors = drs_states;
 	game->weapons = *weapons;
@@ -86,8 +82,7 @@ int	main_entering(t_game *game)
 	mlx_hook(game->win, 6, 1L << 6, mouse_control, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
-	gc_fds(-1);
-	gcmalloc(0,0);
+	gcmalloc(0, 0);
 	return (0);
 }
 
@@ -98,11 +93,7 @@ int	main(int argc, char **argv)
 
 	config = parsser(argc, argv);
 	if (!config)
-	{
-		gc_fds(-1);
-		gcmalloc(0,0);
-		return (1);
-	}
+		gcmalloc(0, 0);
 	game.config = config;
 	game.map = config->map;
 	game.player = *(config->player);

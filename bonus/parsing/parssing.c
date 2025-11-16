@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:40 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/15 22:42:15 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/16 00:46:57 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ int	valid_extension(char *argv)
 		return (0);
 }
 
+void	valid_file(int fd, char **argv, t_config **config)
+{
+	gc_fds(fd);
+	if (!parssing(fd))
+	{
+		printf("enter a valid map/config file\n");
+		return ;
+	}
+	else
+	{
+		*config = config_struct();
+		if (*config)
+			fill_config_struct(argv[1], config);
+	}
+}
+
 t_config	*parsser_core(int argc, char **argv, t_config **config)
 {
 	int	fd;
@@ -33,20 +49,7 @@ t_config	*parsser_core(int argc, char **argv, t_config **config)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd >= 0)
-		{
-			gc_fds(fd);
-			if (!parssing(fd))
-			{
-				printf("enter a valid map/config file\n");
-				return (NULL);
-			}
-			else
-			{
-				*config = config_struct();
-				if (*config)
-					fill_config_struct(argv[1], config);
-			}
-		}
+			valid_file(fd, argv, config);
 		else
 			printf("enter a valid map/config file\n");
 	}
