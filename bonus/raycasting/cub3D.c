@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 19:58:20 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/16 01:32:57 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:11:41 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_game(t_game *game)
 {
-	game->win_width = WIDTH;
-	game->win_height = HEIGHT;
+	game->win_width = 1280;
+	game->win_height = 720;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->win_width, game->win_height,
 			"cub3D");

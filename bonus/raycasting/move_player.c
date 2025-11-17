@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:08:57 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/16 01:33:57 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:23:38 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,29 @@
 
 int	close_window(void *param)
 {
+	t_game	*game;
+	int		i;
+
 	gc_fds(-1);
+	game = (t_game *)param;
+	i = 0;
+	while (i < 5)
+	{
+		if (game->convas.textures[i].img)
+			mlx_destroy_image(game->mlx, game->convas.textures[i].img);
+		i++;
+	}
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	gcmalloc(0, 0);
-	(void)param;
-	exit (1);
+	exit(0);
 }
 
 int	key_release(int keycode, t_game *game)

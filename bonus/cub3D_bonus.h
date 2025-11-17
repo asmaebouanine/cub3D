@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:18:41 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/16 01:35:28 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:15:14 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # define TILE_SIZE 20
 # define VIEW_SIZE 10
 # define SIZE 64
-# define WIDTH 1280
-# define HEIGHT 720
 
 # define LEFT_ARROW 65363
 # define RIGHT_ARROW 65361

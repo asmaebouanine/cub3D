@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asbouani <asbouani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 14:40:52 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/16 01:28:28 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:46:52 by asbouani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 # define BUFFER_SIZE 1
 # define SIZE 64
-# define WIDTH 1280
-# define HEIGHT 720
 
 # define LEFT_ARROW 65363
 # define RIGHT_ARROW 65361
