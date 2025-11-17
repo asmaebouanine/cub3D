@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:31:44 by asbouani          #+#    #+#             */
-/*   Updated: 2025/11/13 12:07:56 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/17 22:19:41 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	door_handling(t_game *game)
 	map_y = (int)coor.check_y;
 	if (map_y < 0 || map_y >= game->map->height
 		|| map_x < 0 || map_x >= game->map->width)
-	{
 		return ;
-	}
 	if (game->map->line[map_y][map_x] == 'D')
 	{
 		i = find_cooresp_dr(game, map_y, map_x);
@@ -59,7 +57,9 @@ void	door_handling(t_game *game)
 			game->doors[i]->state = 'o';
 		else
 		{
-			game->doors[i]->state = 'c';
+			if ((int)coor.player_map_x != map_x
+				|| (int)coor.player_map_y != map_y)
+				game->doors[i]->state = 'c';
 		}
 	}
 }
