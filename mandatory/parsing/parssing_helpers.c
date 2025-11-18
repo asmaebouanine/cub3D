@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:28:26 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 20:07:16 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:23:30 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	is_texture(char *str, t_identifiers *identifiers)
 	if (!ft_strcmp(str, "NO")
 		|| !ft_strcmp(str, "SO")
 		|| !ft_strcmp(str, "WE")
-		|| !ft_strcmp(str, "EA")
-		|| !ft_strcmp(str, "DO"))
+		|| !ft_strcmp(str, "EA"))
 	{
 		if (!ft_strcmp(str, "NO"))
 			identifiers->no++;

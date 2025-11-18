@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 17:12:34 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/11/13 18:52:10 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:17:17 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	calc_wall_2(t_ray *ray)
 {
 	if (ray->side == 1)
 	{
-		if (ray->step_y < 0)
+		if (ray->step_y > 0)
 			ray->tex_id = SO ;
 		else
 			ray->tex_id = NO;
