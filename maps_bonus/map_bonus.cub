@@ -1,0 +1,20 @@
+NO ./textures/north_texture.xpm
+SO ./textures/south_texture.xpm
+WE ./textures/west_texture.xpm
+EA ./textures/east_texture.xpm
+DO ./textures/door_texture.xpm
+
+F 98, 0, 53
+C 255, 105, 180
+
+11111111111111
+100000000000001
+10010000000011
+1D100000000011
+10000000000001
+10000000000001
+1001D100000001
+10000000000001
+10000000000001
+1000N000000001
+11111111111111
